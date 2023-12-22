@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">NewsApplication</string>
+    <string name="app_name">Вестник дня</string>
     <string name="last_news">Последние новости</string>
     <string name="category">Категрии</string>
     <string name="saved">" Сохранёные"</string>
