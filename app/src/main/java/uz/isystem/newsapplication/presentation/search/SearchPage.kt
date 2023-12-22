@@ -71,7 +71,7 @@ class SearchPage : BaseFragment(R.layout.page_search) {
     }
     private fun hideLoading(){
         binding.progressBar.visibility = View.GONE
-        binding.recyclerView.isClickable = true
+        binding.search.isClickable = true
     }
     private fun showLoading(){
         binding.progressBar.visibility = View.VISIBLE
