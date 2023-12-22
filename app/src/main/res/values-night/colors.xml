@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="textColor">#FFFFFF</color>
+    <color name="lineColor">#74FFFFFF</color>
+    <color name="tabSelectedColor">#3F51B5</color>
+    <color name="place_holder_color">#454545</color>
+</resources>

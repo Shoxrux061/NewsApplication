@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/mainScreen">
+
+    <fragment
+        android:id="@+id/mainScreen"
+        android:name="uz.isystem.newsapplication.presentation.main.MainScreen"
+        android:label="screen_main"
+        tools:layout="@layout/screen_main" >
+        <action
+            android:id="@+id/action_mainScreen_to_detailsScreen"
+            app:destination="@id/detailsScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_searchPage"
+            app:destination="@id/searchPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsScreen"
+        android:name="uz.isystem.newsapplication.presentation.detail.DetailsScreen"
+        android:label="screen_details"
+        tools:layout="@layout/screen_details" >
+        <action
+            android:id="@+id/action_detailsScreen_to_mainScreen"
+            app:destination="@id/mainScreen" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            android:defaultValue="no" />
+        <argument
+            android:name="image_url"
+            app:argType="string" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <argument android:name="publishedAt"
+            app:argType="string" />
+        <argument
+            android:name="author"
+            app:argType="string"
+            android:defaultValue="unlnown" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchPage"
+        android:name="uz.isystem.newsapplication.presentation.search.SearchPage"
+        android:label="page_search"
+        tools:layout="@layout/page_search" >
+        <action
+            android:id="@+id/action_searchPage_to_detailsScreen"
+            app:destination="@id/detailsScreen" />
+    </fragment>
+</navigation>

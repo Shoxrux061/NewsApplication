@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/popularID"
+        android:icon="@drawable/ic_popular"
+        android:title="@string/last_news" />
+    <item
+        android:id="@+id/categoryID"
+        android:icon="@drawable/ic_category"
+        android:title="@string/category" />
+    <item
+        android:id="@+id/savedID"
+        android:icon="@drawable/ic_bookmarks"
+        android:title="@string/saved" />
+
+</menu>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NewsApplication</string>
+    <string name="last_news">Last news</string>
+    <string name="category">Category</string>
+    <string name="saved">Saved</string>
+    <string name="language">en</string>
+    <string name="business">Business</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="general">General</string>
+    <string name="headline">Headlines</string>
+    <string name="heath">Health</string>
+    <string name="popular">Popular</string>
+    <string name="scinece">Scinece</string>
+    <string name="sports">Sports</string>
+    <string name="technology">Technology</string>
+    <string name="goLink">Official site ></string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="wantGoLink">Want to follow the link?</string>
+    <string name="empty">No news saved</string>
+    <string name="search">Search</string>
+    <string name="emptyEdt">Enter text</string>
+
+</resources>

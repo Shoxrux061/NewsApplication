@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NewsApplication</string>
+    <string name="last_news">Последние новости</string>
+    <string name="category">Категрии</string>
+    <string name="saved">" Сохранёные"</string>
+    <string name="language">ru</string>
+    <string name="business">Бизнес</string>
+    <string name="entertainment">Развлечеия</string>
+    <string name="general">Общее</string>
+    <string name="headline">Заголовки</string>
+    <string name="heath">Здоровье</string>
+    <string name="popular">Популярное</string>
+    <string name="scinece">Научное</string>
+    <string name="sports">Спорт</string>
+    <string name="technology">Технологии</string>
+    <string name="goLink">Оффициальный сайт ></string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="wantGoLink">Xотите перейти по ссылке?</string>
+    <string name="empty">Нет сохраенных новастей</string>
+    <string name="search">Поиск</string>
+    <string name="emptyEdt">Введите текст</string>
+</resources>
