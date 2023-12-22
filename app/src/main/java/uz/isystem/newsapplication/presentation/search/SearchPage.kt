@@ -2,8 +2,6 @@ package uz.isystem.newsapplication.presentation.search
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -12,7 +10,6 @@ import uz.isystem.newsapplication.databinding.PageSearchBinding
 import uz.isystem.newsapplication.presentation.NewsViewModel
 import uz.isystem.newsapplication.presentation.adapter.CategoryAdapter
 import uz.isystem.newsapplication.presentation.base.BaseFragment
-import uz.isystem.newsapplication.presentation.main.MainScreenDirections
 
 class SearchPage : BaseFragment(R.layout.page_search) {
     private val binding by viewBinding(PageSearchBinding::bind)
