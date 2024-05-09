@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".presentation.splash.SplashScreen">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/viewPager"
+        android:layout_weight="1"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/dots_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            app:dotsColor="#EDEDED"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="15dp"
+            android:layout_marginStart="20dp"
+            app:dotsSpacing="4dp"
+            app:dotsWidthFactor="2.5"
+            app:progressMode="true"
+            app:selectedDotColor="#979797" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="end|center"
+            android:layout_marginEnd="20dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/back_btn"
+                android:id="@+id/back_btn"
+                android:textSize="16sp"
+                android:textColor="@color/place_holder_color"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="center"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:text="@string/next_btn"
+            android:textAllCaps="false"
+            android:id="@+id/next_btn"
+            android:textSize="16sp"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_back"
+            android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

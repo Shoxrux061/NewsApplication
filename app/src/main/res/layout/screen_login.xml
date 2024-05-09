@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_color"
+    tools:context=".presentation.auth.LoginScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="60dp"
+        android:paddingBottom="20dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_black"
+            android:text="@string/hello"
+            android:textColor="@color/textColor"
+            android:textSize="35sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_black"
+            android:text="@string/again"
+            android:textColor="@color/blue"
+            android:textSize="35sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/welcome_back"
+            android:textColor="@color/lineColor"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/hint_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/e_mail"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edt_frame"
+            android:padding="10dp"
+            app:hintEnabled="false" />
+
+        <TextView
+            android:id="@+id/hint_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/password"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edt_frame"
+            android:padding="10dp"
+            app:hintEnabled="false" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <CheckBox
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/gray"
+                android:text="@string/remember" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/btn_create_acc"
+            android:background="@drawable/btn_back"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/gray"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/or_continue"
+            android:textSize="13sp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:id="@+id/btn_facebook"
+                android:background="@drawable/facebook_frame"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/ic_facebook"
+                    android:layout_height="24dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Facebook"
+                    android:textColor="#959595"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="160dp"
+                android:gravity="center"
+                android:id="@+id/btn_google"
+                android:background="@drawable/facebook_frame"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/ic_google"
+                    android:layout_height="24dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Google"
+                    android:textColor="#959595"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:id="@+id/go_to_reg"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/no_acc"
+                android:textSize="13sp"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/create_acc"
+                android:layout_marginStart="5dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_black"
+                android:textColor="@color/blue"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="60dp"
+        android:layout_gravity="bottom|center"
+        android:progressTint="@color/blue"
+        android:visibility="gone"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/progress_bar"
+        android:layout_height="60dp"/>
+
+</FrameLayout>

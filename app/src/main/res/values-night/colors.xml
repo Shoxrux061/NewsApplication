@@ -4,4 +4,8 @@
     <color name="lineColor">#74FFFFFF</color>
     <color name="tabSelectedColor">#3F51B5</color>
     <color name="place_holder_color">#454545</color>
+    <color name="blue">#0048FF</color>
+    <color name="gray">#8C8C8C</color>
+    <color name="background_color">#121212</color>
+
 </resources>

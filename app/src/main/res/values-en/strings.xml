@@ -21,5 +21,29 @@
     <string name="empty">No news saved</string>
     <string name="search">Search</string>
     <string name="emptyEdt">Enter text</string>
+    <string name="splash1Title1">Welcome to our news app!</string>
+    <string name="splash1title2">" Stay updated on global events with comprehensive coverage from various countries"</string>
+    <string name="splash2title2">Get the latest news and deep insights into global events</string>
+    <string name="splash2title1">Explore the world of news with our app!</string>
+    <string name="splash3title1">Unite with our global news app!</string>
+    <string name="splash3title2">Experience diverse cultures, opinions, and events from around the world</string>
+    <string name="back_btn">Back</string>
+    <string name="next_btn">Next</string>
+    <string name="get_started">Get Started</string>
+    <string name="hello">Hello</string>
+    <string name="to_start">Sign up to start</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="or_continue">"или продолжить с "</string>
+    <string name="login">Login</string>
+    <string name="remember">Remember me</string>
+    <string name="already">Already have an account?</string>
+    <string name="create_acc">Create Account</string>
+    <string name="inputError">Input Please</string>
+    <string name="errorPassword">Min. 8 char. in password</string>
+    <string name="nameError">"Min. 3 cahr "</string>
+    <string name="again">Again</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="no_acc">Don\'t have an account?</string>
 
 </resources>

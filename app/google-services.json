@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "288493690486",
+    "firebase_url": "https://newsprofiles-efeb3-default-rtdb.firebaseio.com",
+    "project_id": "newsprofiles-efeb3",
+    "storage_bucket": "newsprofiles-efeb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288493690486:android:ed1dacdb1ebeae11644957",
+        "android_client_info": {
+          "package_name": "uz.isystem.newsapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288493690486-ckigdo02gqo7g0lsk5g56f6cf73u6q3j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABh7qsFc4dv-YqwCCqjjGi5dvByOmuxsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288493690486-ckigdo02gqo7g0lsk5g56f6cf73u6q3j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
