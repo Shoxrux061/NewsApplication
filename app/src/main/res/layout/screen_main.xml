@@ -7,34 +7,6 @@
     android:orientation="vertical"
     tools:context=".presentation.main.MainScreen">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="20dp"
-                android:minHeight="100dp"
-                android:paddingTop="45dp">
-
-                <ImageButton
-                    android:id="@+id/search_btn"
-                    android:layout_width="30dp"
-                    android:layout_gravity="center|start"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="15dp"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_search" />
-
-                <TextView
-                    android:id="@+id/header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="sans-serif-black"
-                    android:text="@string/last_news"
-                    android:textColor="@color/textColor"
-                    android:textSize="18sp" />
-            </FrameLayout>
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

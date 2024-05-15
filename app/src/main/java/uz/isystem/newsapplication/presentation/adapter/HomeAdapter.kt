@@ -10,20 +10,19 @@ import uz.isystem.newsapplication.databinding.HomeItemBinding
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-    lateinit var onClickItem : (Article) -> Unit
-
-    lateinit var onPaginate : () -> Unit
+    lateinit var onClickItem: (Article) -> Unit
 
     private val data = ArrayList<Article>()
 
-    fun setData(data:List<Article>){
+    fun setData(data: List<Article>) {
         this.data.addAll(data)
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(private val binding: HomeItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bindData(data : Article){
-            binding.image.load(data.urlToImage){
+    inner class ViewHolder(private val binding: HomeItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bindData(data: Article) {
+            binding.image.load(data.urlToImage) {
                 placeholder(R.drawable.placeholder)
                 error(R.drawable.placeholder)
             }
@@ -36,7 +35,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            HomeItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            HomeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -44,8 +43,5 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindData(data[position])
-        if (position > data.size - 3) {
-            onPaginate.invoke()
-        }
     }
 }

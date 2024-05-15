@@ -13,9 +13,7 @@ import uz.isystem.newsapplication.presentation.base.BaseFragment
 class MainScreen : BaseFragment(R.layout.screen_main){
     private val binding by viewBinding(ScreenMainBinding::bind)
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
-        binding.searchBtn.setOnClickListener {
-            findNavController().navigate(MainScreenDirections.actionMainScreenToSearchPage())
-        }
+
         setPager()
     }
     private fun setPager() {
@@ -29,22 +27,14 @@ class MainScreen : BaseFragment(R.layout.screen_main){
             when (it.itemId) {
                 R.id.popularID -> {
                     binding.viewPager.setCurrentItem(0, true)
-                    binding.header.startAnimation(alphaAnimate)
-                    binding.header.text = getString(R.string.last_news)
-                    binding.header.startAnimation(alphaAnimateTwo)
+
 
                 }
                 R.id.categoryID -> {
                     binding.viewPager.setCurrentItem(1, true)
-                    binding.header.startAnimation(alphaAnimate)
-                    binding.header.text = getString(R.string.category)
-                    binding.header.startAnimation(alphaAnimateTwo)
                 }
                 else -> {
                     binding.viewPager.setCurrentItem(2, true)
-                    binding.header.startAnimation(alphaAnimate)
-                    binding.header.text = getString(R.string.saved)
-                    binding.header.startAnimation(alphaAnimateTwo)
                 }
             }
             return@setOnItemSelectedListener true

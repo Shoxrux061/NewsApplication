@@ -3,21 +3,27 @@ package uz.isystem.newsapplication.presentation.main.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
-import uz.isystem.newsapplication.databinding.HomePageBinding
-import uz.isystem.newsapplication.presentation.NewsViewModel
+import uz.isystem.newsapplication.databinding.PageHomeBinding
 import uz.isystem.newsapplication.presentation.adapter.HomeAdapter
+import uz.isystem.newsapplication.presentation.adapter.ParentCategoryAdapter
 import uz.isystem.newsapplication.presentation.base.BaseFragment
-import uz.isystem.newsapplication.presentation.main.MainScreenDirections
 
-class HomePage : BaseFragment(R.layout.home_page){
-    private val binding by viewBinding(HomePageBinding::bind)
-    private val adapter = HomeAdapter()
-    private val viewModel:HomeViewModel by viewModels()
-    private var isLoading = false
+class HomePage : BaseFragment(R.layout.page_home) {
+    private val binding by viewBinding(PageHomeBinding::bind)
+    private val multiAdapter = ParentCategoryAdapter()
+    private val homeAdapter = HomeAdapter()
+    private val viewModel: HomeViewModel by viewModels()
+    private var isFirst = false
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
+        val lang = getString(R.string.language)
+        if (!isFirst) {
+            viewModel.getEverything(lang)
+            viewModel.getCategories(lang,"business")
+            viewModel.getCategories(lang,"sports")
+        }
+        isFirst = true
         setAdapter()
         observe()
         setActions()
@@ -25,34 +31,26 @@ class HomePage : BaseFragment(R.layout.home_page){
 
 
     private fun setAdapter() {
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = homeAdapter
+        binding.viewPager.adapter = multiAdapter
     }
-    private fun setActions(){
-        adapter.onClickItem = {
-            findNavController().navigate(MainScreenDirections.actionMainScreenToDetailsScreen(
-                description = it.description?:"no info",
-                title = it.title?:"",
-                imageUrl = it.urlToImage?:"",
-                url = it.url?:"no info",
-                publishedAt = it.publishedAt,
-                author = it.author?:"unknown"
-            ))
-        }
-        adapter.onPaginate = {
-            if(!isLoading) {
-                viewModel.getEverything(lang = getString(R.string.language))
-                isLoading = true
-            }
+
+    private fun setActions() {
+        homeAdapter.onClickItem = {
+
         }
     }
 
     private fun observe() {
-        viewModel.successResponseEvery.observe(viewLifecycleOwner){
-            adapter.setData(it!!.articles)
-            isLoading = false
+        viewModel.successResponseEvery.observe(viewLifecycleOwner) {
+            homeAdapter.setData(it!!.articles)
         }
-        viewModel.errorResponseEvery.observe(viewLifecycleOwner){
-            isLoading = false
+        viewModel.errorResponseEvery.observe(viewLifecycleOwner) {
+
+        }
+
+        viewModel.successResponseCategory.observe(viewLifecycleOwner) {
+            multiAdapter.setData(it!!.articles)
         }
     }
 }

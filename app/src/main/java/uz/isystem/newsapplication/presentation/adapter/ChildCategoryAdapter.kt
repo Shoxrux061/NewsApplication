@@ -6,18 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.data.model.everything.Article
+import uz.isystem.newsapplication.databinding.HomeItemBinding
 import uz.isystem.newsapplication.databinding.ItemCategoryBinding
 
-class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
+class ChildCategoryAdapter : RecyclerView.Adapter<ChildCategoryAdapter.ViewHolder>() {
 
     lateinit var onClickItem : (Article) -> Unit
 
     private val data = ArrayList<Article>()
 
-    fun clearData(){
-        this.data.clear()
-        notifyDataSetChanged()
-    }
     fun setData(data:List<Article>){
         this.data.addAll(data)
         notifyDataSetChanged()
@@ -29,9 +26,9 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
                 placeholder(R.drawable.placeholder)
                 error(R.drawable.placeholder)
             }
-            binding.author.text = data.author?:"unknown"
-            binding.author.isFocusable = true
             binding.title.text = data.title
+            binding.time.text = data.publishedAt
+            binding.author.text = data.author?:"unknown"
             binding.root.setOnClickListener {
                 onClickItem.invoke(data)
             }

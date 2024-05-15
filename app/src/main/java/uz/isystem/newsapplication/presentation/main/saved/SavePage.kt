@@ -5,10 +5,8 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
-import uz.isystem.newsapplication.data.model.everything.Article
 import uz.isystem.newsapplication.data.room.RoomDataBase
 import uz.isystem.newsapplication.databinding.PageSaveBinding
-import uz.isystem.newsapplication.presentation.adapter.CategoryAdapter
 import uz.isystem.newsapplication.presentation.adapter.SavedAdapter
 import uz.isystem.newsapplication.presentation.base.BaseFragment
 import uz.isystem.newsapplication.presentation.main.MainScreenDirections

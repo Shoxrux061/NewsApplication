@@ -8,13 +8,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.databinding.PageSearchBinding
 import uz.isystem.newsapplication.presentation.NewsViewModel
-import uz.isystem.newsapplication.presentation.adapter.CategoryAdapter
+import uz.isystem.newsapplication.presentation.adapter.ParentCategoryAdapter
 import uz.isystem.newsapplication.presentation.base.BaseFragment
 
 class SearchPage : BaseFragment(R.layout.page_search) {
     private val binding by viewBinding(PageSearchBinding::bind)
     private val viewModel: NewsViewModel by viewModels()
-    private val adapter = CategoryAdapter()
+    private val adapter = ParentCategoryAdapter()
     private var isLoading = false
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         setAdapter()
@@ -28,16 +28,6 @@ class SearchPage : BaseFragment(R.layout.page_search) {
             if(!isLoading) {
                 search(binding.searchEdt.text.toString())
             }
-        }
-        adapter.onClickItem={
-            findNavController().navigate(SearchPageDirections.actionSearchPageToDetailsScreen(
-                url = it.url?:"",
-                title = it.title?:"no info",
-                description = it.description?:"no info",
-                author = it.author?:"unknown",
-                imageUrl = it.urlToImage?:"",
-                publishedAt = it.publishedAt
-            ))
         }
     }
 
