@@ -46,5 +46,6 @@
     <string name="again">Again</string>
     <string name="welcome_back">Welcome back!</string>
     <string name="no_acc">Don\'t have an account?</string>
+    <string name="profile">Profile</string>
 
 </resources>

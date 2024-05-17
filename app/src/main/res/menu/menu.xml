@@ -6,12 +6,12 @@
         android:icon="@drawable/ic_popular"
         android:title="@string/last_news" />
     <item
-        android:id="@+id/categoryID"
-        android:icon="@drawable/ic_category"
-        android:title="@string/category" />
-    <item
         android:id="@+id/savedID"
         android:icon="@drawable/ic_bookmarks"
         android:title="@string/saved" />
+    <item
+        android:id="@+id/profileID"
+        android:icon="@drawable/ic_person"
+        android:title="@string/profile"/>
 
 </menu>

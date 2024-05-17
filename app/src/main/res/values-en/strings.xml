@@ -34,7 +34,7 @@
     <string name="to_start">Sign up to start</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="or_continue">"или продолжить с "</string>
+    <string name="or_continue">or continue with</string>
     <string name="login">Login</string>
     <string name="remember">Remember me</string>
     <string name="already">Already have an account?</string>
@@ -45,5 +45,6 @@
     <string name="again">Again</string>
     <string name="welcome_back">Welcome back!</string>
     <string name="no_acc">Don\'t have an account?</string>
+    <string name="profile">Profile</string>
 
 </resources>

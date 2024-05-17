@@ -33,7 +33,6 @@ class SearchPage : BaseFragment(R.layout.page_search) {
 
     private fun observe() {
         viewModel.successResponseEvery.observe(viewLifecycleOwner){
-            adapter.setData(it!!.articles)
             isLoading = false
             hideLoading()
         }

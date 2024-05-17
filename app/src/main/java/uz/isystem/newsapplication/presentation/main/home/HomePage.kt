@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
+import uz.isystem.newsapplication.data.model.everything.EverythingResponse
 import uz.isystem.newsapplication.databinding.PageHomeBinding
 import uz.isystem.newsapplication.presentation.adapter.HomeAdapter
 import uz.isystem.newsapplication.presentation.adapter.ParentCategoryAdapter
@@ -15,6 +16,8 @@ class HomePage : BaseFragment(R.layout.page_home) {
     private val multiAdapter = ParentCategoryAdapter()
     private val homeAdapter = HomeAdapter()
     private val viewModel: HomeViewModel by viewModels()
+    private val multiData = ArrayList<EverythingResponse>()
+    private var dataCount = 0
     private var isFirst = false
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         val lang = getString(R.string.language)
@@ -25,8 +28,13 @@ class HomePage : BaseFragment(R.layout.page_home) {
         }
         isFirst = true
         setAdapter()
+        setTabLayout()
         observe()
         setActions()
+    }
+
+    private fun setTabLayout() {
+
     }
 
 
@@ -50,7 +58,9 @@ class HomePage : BaseFragment(R.layout.page_home) {
         }
 
         viewModel.successResponseCategory.observe(viewLifecycleOwner) {
-            multiAdapter.setData(it!!.articles)
+            multiData.add(it!!)
+            multiAdapter.setData(multiData[dataCount])
+            dataCount++
         }
     }
 }

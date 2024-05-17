@@ -20,7 +20,8 @@ class CategoryPage : BaseFragment(R.layout.page_category) {
     private val viewModel: NewsViewModel by viewModels()
 
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
+
+
+
     }
-
-
 }

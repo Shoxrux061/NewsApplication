@@ -45,4 +45,5 @@
     <string name="again">"Снова "</string>
     <string name="welcome_back">С возвращением!</string>
     <string name="no_acc">Нет аккаунтка?</string>
+    <string name="profile">Профиль</string>
 </resources>

@@ -16,6 +16,7 @@ class ChildCategoryAdapter : RecyclerView.Adapter<ChildCategoryAdapter.ViewHolde
     private val data = ArrayList<Article>()
 
     fun setData(data:List<Article>){
+        this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
     }
@@ -30,7 +31,7 @@ class ChildCategoryAdapter : RecyclerView.Adapter<ChildCategoryAdapter.ViewHolde
             binding.time.text = data.publishedAt
             binding.author.text = data.author?:"unknown"
             binding.root.setOnClickListener {
-                onClickItem.invoke(data)
+                //onClickItem.invoke(data)
             }
         }
     }
