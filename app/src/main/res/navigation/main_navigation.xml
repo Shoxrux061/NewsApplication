@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainScreen_to_searchPage"
             app:destination="@id/searchPage" />
+        <action
+            android:id="@+id/action_mainScreen_to_seeAllScreen"
+            app:destination="@id/seeAllScreen" />
     </fragment>
     <fragment
         android:id="@+id/detailsScreen"
@@ -44,6 +47,10 @@
             android:name="author"
             app:argType="string"
             android:defaultValue="unlnown" />
+        <argument
+            android:name="content"
+            app:argType="string"
+            android:defaultValue="..." />
     </fragment>
     <fragment
         android:id="@+id/searchPage"
@@ -86,5 +93,14 @@
         <action
             android:id="@+id/action_loginScreen_to_registrationScreen"
             app:destination="@id/registrationScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/seeAllScreen"
+        android:name="uz.isystem.newsapplication.presentation.seeAll.SeeAllScreen"
+        android:label="screen_see_all"
+        tools:layout="@layout/screen_see_all" >
+        <argument
+            android:name="category"
+            app:argType="string" />
     </fragment>
 </navigation>

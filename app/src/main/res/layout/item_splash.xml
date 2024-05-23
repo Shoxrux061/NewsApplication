@@ -27,7 +27,7 @@
             android:id="@+id/title1"
             android:textColor="@color/textColor"
             android:text="Lorem Ipsum is simply \ndummy"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:fontFamily="@font/poppins_black"
             android:layout_height="wrap_content"/>
 
@@ -36,7 +36,7 @@
             android:textColor="#535353"
             android:id="@+id/title2"
             android:fontFamily="@font/poppins_regular"
-            android:textSize="16sp"
+            android:textSize="13sp"
             android:text="Lorem Ipsum is simply dummy text of \nthe printing and typesetting industry."
             android:layout_height="wrap_content"/>
 

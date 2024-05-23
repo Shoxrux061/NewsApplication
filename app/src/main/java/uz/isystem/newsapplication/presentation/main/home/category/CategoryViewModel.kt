@@ -1,4 +1,4 @@
-package uz.isystem.newsapplication.presentation.main.category
+package uz.isystem.newsapplication.presentation.main.home.category
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -17,8 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CategoryViewModel @Inject constructor(
-    private val repository: NewsRepository,
-    @ApplicationContext context: Context
+    private val repository: NewsRepository
 ) : ViewModel() {
 
     private var page = 1

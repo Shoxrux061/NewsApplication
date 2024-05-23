@@ -46,4 +46,9 @@
     <string name="welcome_back">С возвращением!</string>
     <string name="no_acc">Нет аккаунтка?</string>
     <string name="profile">Профиль</string>
+    <string name="settings">Настройки</string>
+    <string name="by">Источник</string>
+    <string name="seeall">Смотреть все</string>
+    <string name="trending">Актуальное</string>
+    <string name="lastest">Последние</string>
 </resources>

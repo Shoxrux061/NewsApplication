@@ -41,7 +41,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/username"
             android:textColor="@color/gray"
-            android:textSize="16sp" />
+            android:textSize="13sp" />
 
         <EditText
             android:id="@+id/edt_username"
@@ -60,7 +60,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/e_mail"
             android:textColor="@color/gray"
-            android:textSize="16sp" />
+            android:textSize="13sp" />
 
         <EditText
             android:id="@+id/edt_email"
@@ -79,7 +79,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/password"
             android:textColor="@color/gray"
-            android:textSize="16sp" />
+            android:textSize="13sp" />
 
         <EditText
             android:id="@+id/edt_password"

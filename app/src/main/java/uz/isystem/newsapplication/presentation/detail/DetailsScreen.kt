@@ -105,6 +105,8 @@ class DetailsScreen : BaseFragment(R.layout.screen_details) {
             binding.saveBtn.setImageResource(R.drawable.ic_not_saved)
         }
 
+        binding.author.isSelected = true
+        binding.content.text = args.content
         binding.publishedAt.text = formatDate(args.publishedAt)
         binding.image.load(args.imageUrl){
             placeholder(R.drawable.placeholder)
@@ -112,6 +114,8 @@ class DetailsScreen : BaseFragment(R.layout.screen_details) {
         }
         binding.title.text = args.title
         binding.description.text = args.description
+        val author = "${getString(R.string.by)}: ${args.author}"
+        binding.author.text = author
     }
 }
 

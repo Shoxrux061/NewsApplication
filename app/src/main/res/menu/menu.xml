@@ -11,7 +11,7 @@
         android:title="@string/saved" />
     <item
         android:id="@+id/profileID"
-        android:icon="@drawable/ic_person"
-        android:title="@string/profile"/>
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings"/>
 
 </menu>

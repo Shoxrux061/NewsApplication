@@ -43,22 +43,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/back_btn"
                 android:id="@+id/back_btn"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:textColor="@color/place_holder_color"
                 android:fontFamily="@font/poppins_medium"
                 android:layout_marginEnd="10dp"
                 android:layout_gravity="center"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:text="@string/next_btn"
             android:textAllCaps="false"
             android:id="@+id/next_btn"
-            android:textSize="16sp"
+            android:textSize="13sp"
             android:paddingHorizontal="10dp"
             android:textColor="@color/white"
             android:background="@drawable/btn_back"
-            android:layout_height="wrap_content"/>
+            android:layout_height="35dp"/>
 
         </LinearLayout>
 

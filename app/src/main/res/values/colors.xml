@@ -10,4 +10,5 @@
     <color name="gray">#8C8C8C</color>
     <color name="blue">#0048FF</color>
     <color name="background_color">#fff</color>
+    <color name="shimmer_color">#D3D3D3</color>
 </resources>

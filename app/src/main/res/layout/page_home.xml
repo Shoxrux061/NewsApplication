@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
     tools:context=".presentation.main.home.HomePage">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:id="@+id/parent"
+        android:visibility="visible"
+        android:layout_height="match_parent">
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -17,17 +23,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
+            app:contentScrim="@color/background_color"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="@color/background_color">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="10dp"
+                android:orientation="vertical"
                 app:layout_collapseMode="parallax">
 
                 <ImageView
@@ -41,44 +47,44 @@
 
 
                 <FrameLayout
+                    android:id="@+id/search_btn"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@drawable/edt_frame"
-                    android:id="@+id/search_btn"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/edt_frame">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:elevation="10dp"
-                        android:layout_gravity="start|center_vertical"
-                        android:layout_marginStart="10dp"
-                        android:src="@drawable/ic_search" />
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="start|center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:elevation="10dp"
+                            android:src="@drawable/ic_search" />
 
                         <TextView
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:paddingTop="3dp"
                             android:text="@string/search"
                             android:textColor="@color/textColor"
-                            android:textSize="16sp"
-                            android:layout_marginStart="10dp"
-                            android:layout_gravity="center"
-                            android:paddingTop="3dp"
-                            android:gravity="center"
-                            android:fontFamily="@font/poppins_regular"
-                            android:layout_height="wrap_content"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <ImageButton
                         android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_gravity="end|center"
                         android:layout_marginEnd="10dp"
-                        android:background="?selectableItemBackgroundBorderless"
-                        android:layout_height="24dp"/>
+                        android:background="?selectableItemBackgroundBorderless" />
 
                 </FrameLayout>
 
@@ -93,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
                         android:fontFamily="@font/poppins_black"
-                        android:text="Trending"
+                        android:text="@string/trending"
                         android:textColor="@color/textColor"
                         android:textSize="13sp" />
 
@@ -102,8 +108,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center"
                         android:alpha="0.7"
+                        android:id="@+id/seeAllTrending"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="See all>"
+                        android:text="@string/seeall"
                         android:textColor="@color/textColor"
                         android:textSize="13sp" />
 
@@ -127,16 +134,53 @@
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/background_color"
-            app:tabGravity="center"
-            app:tabIconTint="@color/textColor"
-            app:tabIndicatorColor="@color/tabSelectedColor"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/tabSelectedColor" />
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
+                    android:fontFamily="@font/poppins_black"
+                    android:text="@string/lastest"
+                    android:textColor="@color/textColor"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center"
+                    android:alpha="0.7"
+                    android:id="@+id/seeAllLatest"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/seeall"
+                    android:textColor="@color/textColor"
+                    android:textSize="13sp" />
+
+            </FrameLayout>
+
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_color"
+                app:tabGravity="center"
+                app:tabIconTint="@color/textColor"
+                app:tabIndicatorColor="@color/tabSelectedColor"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/textColor" />
+
+        </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -146,32 +190,6 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center"
-                android:fontFamily="@font/poppins_black"
-                android:text="Last"
-                android:textColor="@color/textColor"
-                android:textSize="13sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center"
-                android:alpha="0.7"
-                android:fontFamily="@font/poppins_medium"
-                android:text="See all>"
-                android:textColor="@color/textColor"
-                android:textSize="13sp" />
-
-        </FrameLayout>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
@@ -180,5 +198,19 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:id="@+id/shimmer"
+        tools:visibility="gone"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include layout="@layout/shimmer_home"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</FrameLayout>

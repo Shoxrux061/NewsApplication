@@ -3,11 +3,9 @@ package uz.isystem.newsapplication.presentation.main
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.databinding.ScreenMainBinding
-import uz.isystem.newsapplication.presentation.adapter.MainAdapter
 import uz.isystem.newsapplication.presentation.base.BaseFragment
 
 class MainScreen : BaseFragment(R.layout.screen_main){
@@ -30,7 +28,7 @@ class MainScreen : BaseFragment(R.layout.screen_main){
 
 
                 }
-                R.id.categoryID -> {
+                R.id.savedID -> {
                     binding.viewPager.setCurrentItem(1, true)
                 }
                 else -> {
