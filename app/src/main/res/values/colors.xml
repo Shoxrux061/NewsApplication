@@ -11,4 +11,7 @@
     <color name="blue">#0048FF</color>
     <color name="background_color">#fff</color>
     <color name="shimmer_color">#D3D3D3</color>
+    <color name="rd_btn_color1">#EFEFEF</color>
+    <color name="rd_btn_color2">#353535</color>
+    <color name="rd_select_color">#90B8FD</color>
 </resources>

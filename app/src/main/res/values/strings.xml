@@ -52,5 +52,21 @@
     <string name="seeall">See All</string>
     <string name="trending">Trending</string>
     <string name="lastest">Latest</string>
+    <string name="key_word">Key Words</string>
+    <string name="searchIn">Search In</string>
+    <string name="sortBy">Sort By</string>
+    <string name="inTitle">In Title</string>
+    <string name="inDescription">In Description</string>
+    <string name="inContent">In Content</string>
+    <string name="by_relevance">By Relevance</string>
+    <string name="by_popularity">By Popularity</string>
+    <string name="by_date">By Date</string>
+    <string name="key_relevance" translatable="false">relevance</string>
+    <string name="popularity_key" translatable="false">popularity</string>
+    <string name="date_key" translatable="false">publishedAt</string>
+    <string name="search_by_date">Search By Date</string>
+    <string name="format" translatable="false">yyyy-MM-dd</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
 
 </resources>

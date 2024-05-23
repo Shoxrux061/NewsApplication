@@ -3,25 +3,58 @@ package uz.isystem.newsapplication.presentation.seeAll
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.databinding.ScreenSeeAllBinding
-import uz.isystem.newsapplication.presentation.adapter.CategoryAdapter
 import uz.isystem.newsapplication.presentation.base.BaseFragment
 
 class SeeAllScreen : BaseFragment(R.layout.screen_see_all) {
     private val binding by viewBinding(ScreenSeeAllBinding::bind)
     private val viewModel: SeeAllViewModel by viewModels()
-    private val adapter by lazy { CategoryAdapter() }
+    private val adapter by lazy { SeeAllAdapter() }
     private val args: SeeAllScreenArgs by navArgs()
+    private var isLoading = false
     private lateinit var lang: String
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         lang = getString(R.string.language)
+        if(args.category != "top") {
+            binding.category.text = args.category.capitalize()
+        }else{
+            binding.category.text = getString(R.string.trending).capitalize()
+        }
         setAdapter()
         sendRequest()
         observe()
+        listenActions()
 
+    }
+
+    private fun listenActions() {
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        adapter.onPaginate = {
+            sendRequest()
+        }
+        adapter.onClickItem = {
+            nextScreen(
+                SeeAllScreenDirections.actionSeeAllScreenToDetailsScreen(
+                    title = it.title.toString(),
+                    publishedAt = it.publishedAt,
+                    author = it.author ?: "unknown",
+                    imageUrl = it.urlToImage.toString(),
+                    url = it.url.toString(),
+                    description = it.description.toString(),
+                    content = it.content.toString()
+                )
+            )
+        }
     }
 
     private fun setAdapter() {
@@ -29,19 +62,40 @@ class SeeAllScreen : BaseFragment(R.layout.screen_see_all) {
     }
 
     private fun observe() {
-        viewModel.successResponseCategory.observe(viewLifecycleOwner){
+        viewModel.successResponseCategory.observe(viewLifecycleOwner) {
             adapter.setData(it!!.articles)
+            isLoading = false
         }
-        viewModel.successResponseEvery.observe(viewLifecycleOwner){
+        viewModel.successResponseEvery.observe(viewLifecycleOwner) {
             adapter.setData(it!!.articles)
+            isLoading = false
+        }
+        viewModel.errorResponseEvery.observe(viewLifecycleOwner) {
+            isLoading = false
+        }
+        viewModel.errorResponseCategory.observe(viewLifecycleOwner) {
+            isLoading = false
         }
     }
 
     private fun sendRequest() {
-        if (args.category == "top") {
-            viewModel.getEverything(lang)
-        } else {
-            viewModel.getCategories(lang, args.category)
+        if (!isLoading) {
+            if (args.category == "top") {
+                viewModel.getEverything(lang)
+            } else {
+                viewModel.getCategories(lang, args.category)
+            }
+            isLoading = true
         }
+    }
+
+    private fun nextScreen(navDirections: NavDirections) {
+        val navOptions = NavOptions.Builder()
+            .setEnterAnim(R.anim.slide_in)
+            .setExitAnim(R.anim.slide_out)
+            .setPopEnterAnim(R.anim.slide_in_reverse)
+            .setPopExitAnim(R.anim.slide_out_reverse)
+            .build()
+        findNavController().navigate(navDirections, navOptions)
     }
 }

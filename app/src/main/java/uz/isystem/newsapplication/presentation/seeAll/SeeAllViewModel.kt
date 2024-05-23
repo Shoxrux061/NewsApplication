@@ -20,6 +20,8 @@ class SeeAllViewModel @Inject constructor(
     @ApplicationContext context: Context
 ) : ViewModel() {
 
+    private var pageEverything = 1
+    private var pageCategory = 1
 
     private val successDataEvery: MutableLiveData<EverythingResponse?> =
         MutableLiveData<EverythingResponse?>()
@@ -48,13 +50,14 @@ class SeeAllViewModel @Inject constructor(
                 q = "a",
                 lang = lang,
                 apiKey = Constants.API_KEY,
-                page = 1,
+                page = pageEverything,
                 pageSize = 20,
                 sortBy = "publishedAt",
                 searchIn = "title"
             )) {
                 is ResultWrapper.Success -> {
                     successDataEvery.postValue(result.data)
+                    pageEverything++
                 }
 
                 is ResultWrapper.Error -> {
@@ -73,13 +76,14 @@ class SeeAllViewModel @Inject constructor(
             when (val result = repository.getCategories(
                 lang = lang,
                 key = Constants.API_KEY,
-                page = 1,
+                page = pageCategory,
                 pageSize = 20,
                 category = category
 
             )) {
                 is ResultWrapper.Success -> {
                     successDataCategory.postValue(result.data)
+                    pageCategory++
                 }
 
                 is ResultWrapper.Error -> {

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/splashScreen">
+    app:startDestination="@id/filterScreen">
 
     <fragment
         android:id="@+id/mainScreen"
@@ -54,12 +54,15 @@
     </fragment>
     <fragment
         android:id="@+id/searchPage"
-        android:name="uz.isystem.newsapplication.presentation.search.SearchPage"
+        android:name="uz.isystem.newsapplication.presentation.search.SearchScreen"
         android:label="page_search"
-        tools:layout="@layout/page_search" >
+        tools:layout="@layout/screen_search" >
         <action
             android:id="@+id/action_searchPage_to_detailsScreen"
             app:destination="@id/detailsScreen" />
+        <action
+            android:id="@+id/action_searchPage_to_filterScreen"
+            app:destination="@id/filterScreen" />
     </fragment>
     <fragment
         android:id="@+id/splashScreen"
@@ -102,5 +105,17 @@
         <argument
             android:name="category"
             app:argType="string" />
+        <action
+            android:id="@+id/action_seeAllScreen_to_detailsScreen"
+            app:destination="@id/detailsScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterScreen"
+        android:name="uz.isystem.newsapplication.presentation.search.filtr.FilterScreen"
+        android:label="screen_filter"
+        tools:layout="@layout/screen_filter" >
+        <action
+            android:id="@+id/action_filterScreen_to_searchPage"
+            app:destination="@id/searchPage" />
     </fragment>
 </navigation>

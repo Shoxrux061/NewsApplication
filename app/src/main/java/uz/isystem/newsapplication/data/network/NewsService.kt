@@ -8,21 +8,34 @@ import uz.isystem.newsapplication.data.model.everything.EverythingResponse
 interface NewsService {
     @GET("v2/everything")
     suspend fun getLastNews(
-        @Query("q")q:String,
-        @Query("searchIn")searchIn:String,
+        @Query("q") q: String,
+        @Query("searchIn") searchIn: String,
         @Query("apiKey") apiKey: String,
         @Query("language") lang: String,
         @Query("sortBy") sort: String,
-        @Query("pageSize") pageSize : Int,
-        @Query("page") page : Int
+        @Query("pageSize") pageSize: Int,
+        @Query("page") page: Int
     ): Response<EverythingResponse?>
 
     @GET("v2/top-headlines")
     suspend fun getCategories(
-        @Query("category")category:String,
-        @Query("apiKey")key:String,
-        @Query("language")lang: String,
-        @Query("pageSize")pageSize: Int,
-        @Query("page")page: Int
-    ):Response<EverythingResponse?>
+        @Query("category") category: String,
+        @Query("apiKey") key: String,
+        @Query("language") lang: String,
+        @Query("pageSize") pageSize: Int,
+        @Query("page") page: Int
+    ): Response<EverythingResponse?>
+
+    @GET("v2/everything")
+    suspend fun search(
+        @Query("q") q: String,
+        @Query("apiKey") key: String,
+        @Query("language") lang: String,
+        @Query("pageSize") pageSize: Int,
+        @Query("page") page: Int,
+        @Query("searchIn") searchIn: String,
+        @Query("sortBy") sortBy: String,
+        @Query("from") from: String,
+        @Query("to") to: String
+    ): Response<EverythingResponse?>
 }

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="50dp">
 
         <ImageButton
             android:id="@+id/btn_back"
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:fontFamily="@font/poppins_medium"
             android:maxLines="1"
             android:textColor="@color/textColor"
@@ -37,6 +37,7 @@
     <View
         android:layout_width="match_parent"
         android:alpha="0.2"
+        android:layout_marginTop="20dp"
         android:background="@color/textColor"
         android:layout_height="1dp" />
 

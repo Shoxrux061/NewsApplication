@@ -31,20 +31,46 @@ class NewsRepository @Inject constructor(private val service: NewsService) {
             )
         }
     }
+
     suspend fun getCategories(
         key: String,
         page: Int,
         pageSize: Int,
         lang: String,
         category: String,
-    ):ResultWrapper<EverythingResponse?,Any?>{
-        return parseResponse(Dispatchers.IO){
+    ): ResultWrapper<EverythingResponse?, Any?> {
+        return parseResponse(Dispatchers.IO) {
             service.getCategories(
                 key = key,
                 page = page,
                 pageSize = pageSize,
                 lang = lang,
                 category = category
+            )
+        }
+    }
+
+    suspend fun search(
+        key: String,
+        lang: String,
+        page: Int,
+        pageSize: Int,
+        searchIn: String,
+        sortBy: String,
+        from : String,
+        to : String,
+        q:String
+    ): ResultWrapper<EverythingResponse?, Any?> {
+        return parseResponse(Dispatchers.IO) {
+            service.search(
+                key = key,
+                lang = lang,
+                page = page,
+                pageSize = pageSize,
+                sortBy = sortBy,
+                searchIn = searchIn,
+                from = from,
+                to = to, q = q
             )
         }
     }

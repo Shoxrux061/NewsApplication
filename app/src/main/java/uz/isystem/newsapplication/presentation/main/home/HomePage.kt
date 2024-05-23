@@ -90,6 +90,10 @@ class HomePage : BaseFragment(R.layout.page_home) {
 
     private fun setActions() {
 
+        binding.searchBtn.setOnClickListener {
+            nextScreen(MainScreenDirections.actionMainScreenToSearchPage())
+        }
+
         binding.seeAllLatest.setOnClickListener {
             nextScreen(MainScreenDirections.actionMainScreenToSeeAllScreen(category))
         }

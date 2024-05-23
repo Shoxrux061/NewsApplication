@@ -45,7 +45,7 @@ class HomeViewModel @Inject constructor(
 
         viewModelScope.launch {
             when (val result = repository.getEverything(
-                q = "a",
+                q = "*",
                 lang = lang,
                 apiKey = Constants.API_KEY,
                 page = 1,
