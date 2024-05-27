@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.search.filtr.FilterScreen">
 
     <LinearLayout
@@ -43,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:id="@+id/radioGroup"
             android:orientation="horizontal">
 
             <RadioButton
@@ -126,11 +128,13 @@
             android:layout_width="match_parent"
             android:layout_marginHorizontal="20dp"
             android:layout_height="50dp">
-            <EditText
+            <com.vicmikhailau.maskededittext.MaskedEditText
                 android:layout_width="0dp"
                 android:backgroundTint="#8F8F8F"
                 android:hint="@string/format"
+                app:mask="####-##-##"
                 android:id="@+id/from"
+                android:inputType="date"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/textColor"
@@ -160,10 +164,12 @@
             android:layout_width="match_parent"
             android:layout_marginHorizontal="20dp"
             android:layout_height="50dp">
-            <EditText
+            <com.vicmikhailau.maskededittext.MaskedEditText
                 android:layout_width="0dp"
                 android:backgroundTint="#8F8F8F"
                 android:hint="@string/format"
+                android:inputType="date"
+                app:mask="####-##-##"
                 android:layout_height="match_parent"
                 android:id="@+id/to"
                 android:fontFamily="@font/poppins_regular"
