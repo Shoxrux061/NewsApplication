@@ -15,6 +15,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     private val data = ArrayList<Article>()
 
     fun setData(data: List<Article>) {
+        this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
     }

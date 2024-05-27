@@ -68,5 +68,9 @@
     <string name="format" translatable="false">yyyy-MM-dd</string>
     <string name="from">From</string>
     <string name="to">To</string>
+    <string name="notifications">Notifications</string>
+    <string name="theme">Theme</string>
+    <string name="about_uss">About uss</string>
+    <string name="logout">Logout</string>
 
 </resources>

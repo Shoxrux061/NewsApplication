@@ -63,4 +63,8 @@
     <string name="search_by_date">Искать По Дате</string>
     <string name="from">С</string>
     <string name="to">По</string>
+    <string name="notifications">Уведомления</string>
+    <string name="theme">Тема</string>
+    <string name="about_uss">О нас</string>
+    <string name="logout">Выйти</string>
 </resources>

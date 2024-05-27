@@ -103,15 +103,17 @@ class HomePage : BaseFragment(R.layout.page_home) {
         }
 
         homeAdapter.onClickItem = {
-            nextScreen(MainScreenDirections.actionMainScreenToDetailsScreen(
-                title = it.title.toString(),
-                publishedAt = it.publishedAt,
-                author = it.author.toString(),
-                imageUrl = it.urlToImage.toString(),
-                url = it.url.toString(),
-                description = it.description.toString(),
-                content = it.content.toString()
-            ))
+            nextScreen(
+                MainScreenDirections.actionMainScreenToDetailsScreen(
+                    title = it.title.toString(),
+                    publishedAt = it.publishedAt,
+                    author = it.author.toString(),
+                    imageUrl = it.urlToImage.toString(),
+                    url = it.url.toString(),
+                    description = it.description.toString(),
+                    content = it.content.toString()
+                )
+            )
         }
 
         binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {

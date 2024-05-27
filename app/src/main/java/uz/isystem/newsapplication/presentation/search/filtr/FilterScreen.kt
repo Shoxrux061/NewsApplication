@@ -31,7 +31,6 @@ class FilterScreen : BaseFragment(R.layout.screen_filter) {
         setSpinnerData()
         listenActions()
 
-
     }
 
     private fun listenActions() {

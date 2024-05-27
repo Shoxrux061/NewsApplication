@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import uz.isystem.newsapplication.R
+import uz.isystem.newsapplication.data.cache.LocaleStorage
 import uz.isystem.newsapplication.data.model.user.UserModel
 import uz.isystem.newsapplication.databinding.ScreenRegistrationBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
@@ -20,9 +21,9 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
     private val binding by viewBinding(ScreenRegistrationBinding::bind)
     private lateinit var auth: FirebaseAuth
     private lateinit var dbr: DatabaseReference
-    private var errorText : String? = null
-    private var errorPassword : String? = null
-    private var errorName : String? = null
+    private var errorText: String? = null
+    private var errorPassword: String? = null
+    private var errorName: String? = null
     private var isLoading = false
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         auth = FirebaseAuth.getInstance()
@@ -79,10 +80,12 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
                     name = name
                 )
                 dbr.child(uid).setValue(user)
-
+                LocaleStorage.getObject().setIsSigned(true)
+                LocaleStorage.getObject().setEmailNPassword(email, password)
+                nextScreen(LoginScreenDirections.actionLoginScreenToMainScreen())
                 nextScreen(RegistrationScreenDirections.actionRegistrationScreenToMainScreen())
 
-            }else{
+            } else {
                 isLoading = false
                 setLoading()
                 Toast.makeText(context, "Canceled", Toast.LENGTH_SHORT).show()
@@ -90,14 +93,14 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
         }
     }
 
-    private fun nextScreen(navDirections:NavDirections) {
+    private fun nextScreen(navDirections: NavDirections) {
         val navOptions = NavOptions.Builder()
             .setEnterAnim(R.anim.slide_in)
             .setExitAnim(R.anim.slide_out)
             .setPopEnterAnim(R.anim.slide_in_reverse)
             .setPopExitAnim(R.anim.slide_out_reverse)
             .build()
-        findNavController().navigate(navDirections,navOptions)
+        findNavController().navigate(navDirections, navOptions)
     }
 
     private fun setLoading() {

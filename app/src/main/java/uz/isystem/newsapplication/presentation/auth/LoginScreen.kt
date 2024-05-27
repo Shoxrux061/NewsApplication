@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.firebase.auth.FirebaseAuth
 import uz.isystem.newsapplication.R
+import uz.isystem.newsapplication.data.cache.LocaleStorage
 import uz.isystem.newsapplication.databinding.ScreenLoginBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
 
@@ -72,6 +73,8 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
             if (result.isSuccessful) {
                 isLoading = false
                 setLoading()
+                LocaleStorage.getObject().setIsSigned(true)
+                LocaleStorage.getObject().setEmailNPassword(email, password)
                 nextScreen(LoginScreenDirections.actionLoginScreenToMainScreen())
             } else {
                 isLoading = false

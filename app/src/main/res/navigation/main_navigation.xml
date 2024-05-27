@@ -19,6 +19,12 @@
         <action
             android:id="@+id/action_mainScreen_to_seeAllScreen"
             app:destination="@id/seeAllScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_profileScreen"
+            app:destination="@id/profileScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_loginScreen"
+            app:destination="@id/loginScreen" />
     </fragment>
     <fragment
         android:id="@+id/detailsScreen"
@@ -122,4 +128,9 @@
             android:id="@+id/action_filterScreen_to_searchPage"
             app:destination="@id/searchPage" />
     </fragment>
+    <fragment
+        android:id="@+id/profileScreen"
+        android:name="uz.isystem.newsapplication.presentation.profile.ProfileScreen"
+        android:label="screen_profile"
+        tools:layout="@layout/screen_profile" />
 </navigation>
