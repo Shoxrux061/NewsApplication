@@ -1,8 +1,10 @@
 package uz.isystem.newsapplication.presentation.auth
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -25,6 +27,7 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
     private var errorPassword: String? = null
     private var errorName: String? = null
     private var isLoading = false
+    private var doubleBackToExitPressedOnce = false
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         auth = FirebaseAuth.getInstance()
         dbr = FirebaseDatabase.getInstance().getReference("users")
@@ -121,5 +124,28 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
             binding.btnGoogle.isClickable = true
             binding.parent.alpha = 1f
         }
+    }
+
+    private fun onBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (doubleBackToExitPressedOnce) {
+                        requireActivity().finish()
+                        return
+                    }
+                    doubleBackToExitPressedOnce = true
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.double_tap),
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    Handler().postDelayed({
+                        doubleBackToExitPressedOnce = false
+                    }, 2000)
+                }
+            })
     }
 }

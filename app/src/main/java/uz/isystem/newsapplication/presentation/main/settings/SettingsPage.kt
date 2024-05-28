@@ -37,16 +37,16 @@ class SettingsPage : BaseFragment(R.layout.page_settings) {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
 
         alertDialogBuilder.setTitle(getString(R.string.app_name))
-        alertDialogBuilder.setMessage(getString(R.string.wantGoLink))
+        alertDialogBuilder.setMessage(getString(R.string.want_logout))
 
         alertDialogBuilder.setPositiveButton(getString(R.string.yes)) { dialog, _ ->
             auth.signOut()
-            findNavController().navigate(MainScreenDirections.actionMainScreenToLoginScreen())
+            LocaleStorage.getObject().setIsSigned(false)
+            nextScreen(MainScreenDirections.actionMainScreenToLoginScreen())
             dialog.dismiss()
         }
 
         alertDialogBuilder.setNegativeButton(getString(R.string.no)) { dialog, _ ->
-            LocaleStorage.getObject().setIsSigned(false)
             dialog.dismiss()
         }
         val alertDialog = alertDialogBuilder.create()

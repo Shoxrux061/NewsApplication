@@ -8,6 +8,7 @@ class LocaleStorage private constructor(context: Context) {
     private val keyIsSigned = "KEY_IS_SIGNED"
     private val keyEmail = "KEY_EMAIL"
     private val keyPassword = "KEY_PASSWORD"
+    private val keyIsFirst = "KEY_IS_FIRST"
 
     init {
         sharedPreferences = context.getSharedPreferences("cache", Context.MODE_PRIVATE)
@@ -34,6 +35,13 @@ class LocaleStorage private constructor(context: Context) {
             sharedPreferences!!.edit().remove(keyEmail).apply()
         }
         sharedPreferences!!.edit().putBoolean(keyIsSigned, isSigned).apply()
+    }
+
+    fun setIsNotFirst(){
+        sharedPreferences!!.edit().putBoolean(keyIsFirst,false).apply()
+    }
+    fun getIsFirst():Boolean{
+        return sharedPreferences!!.getBoolean(keyIsFirst, true)
     }
 
     fun getIsSigned(): Boolean {

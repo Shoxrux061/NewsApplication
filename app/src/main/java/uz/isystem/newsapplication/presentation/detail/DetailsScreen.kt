@@ -117,5 +117,6 @@ class DetailsScreen : BaseFragment(R.layout.screen_details) {
         val author = "${getString(R.string.by)}: ${args.author}"
         binding.author.text = author
     }
+
 }
 

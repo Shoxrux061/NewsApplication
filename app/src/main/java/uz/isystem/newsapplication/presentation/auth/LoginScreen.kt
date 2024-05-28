@@ -1,9 +1,11 @@
 package uz.isystem.newsapplication.presentation.auth
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -22,8 +24,10 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
     private var errorText: String? = null
     private var errorPassword: String? = null
     private var errorName: String? = null
-    override fun onCreate(view: View, savedInstanceState: Bundle?) {
+    private var doubleBackToExitPressedOnce = false
 
+    override fun onCreate(view: View, savedInstanceState: Bundle?) {
+        onBackPressed()
         auth = FirebaseAuth.getInstance()
         errorName = getString(R.string.nameError)
         errorPassword = getString(R.string.errorPassword)
@@ -107,5 +111,26 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
         }
     }
 
+    private fun onBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (doubleBackToExitPressedOnce) {
+                        requireActivity().finish()
+                        return
+                    }
+                    doubleBackToExitPressedOnce = true
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.double_tap),
+                        Toast.LENGTH_SHORT
+                    ).show()
 
+                    Handler().postDelayed({
+                        doubleBackToExitPressedOnce = false
+                    }, 2000)
+                }
+            })
+    }
 }

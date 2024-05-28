@@ -1,7 +1,10 @@
 package uz.isystem.newsapplication.presentation.search
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
@@ -29,6 +32,7 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
     private var q = ""
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         lang = getString(R.string.language)
+        onBackPressed()
         checkIsBack()
         setAdapter()
         setActions()
@@ -153,5 +157,15 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
             .setPopExitAnim(R.anim.slide_out_reverse)
             .build()
         findNavController().navigate(navDirections, navOptions)
+    }
+
+    private fun onBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    nextScreen(SearchScreenDirections.actionSearchPageToMainScreen())
+                }
+            })
     }
 }

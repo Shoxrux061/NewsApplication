@@ -67,5 +67,7 @@
     <string name="theme">Theme</string>
     <string name="about_uss">About uss</string>
     <string name="logout">Logout</string>
+    <string name="want_logout">Du you want to logout?</string>
+    <string name="double_tap">Double tap to quit</string>
 
 </resources>

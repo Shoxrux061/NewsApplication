@@ -5,7 +5,7 @@
     <item
         android:width="99dp"
         android:height="30dp"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:drawable="@drawable/news_logo"/>
 
 </layer-list>

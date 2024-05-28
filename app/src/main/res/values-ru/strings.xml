@@ -67,4 +67,6 @@
     <string name="theme">Тема</string>
     <string name="about_uss">О нас</string>
     <string name="logout">Выйти</string>
+    <string name="want_logout">Вы хотите выйти?</string>
+    <string name="double_tap">Нажмите еще раз для выхода</string>
 </resources>
