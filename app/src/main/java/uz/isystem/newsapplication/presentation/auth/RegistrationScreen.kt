@@ -29,8 +29,9 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
     private var isLoading = false
     private var doubleBackToExitPressedOnce = false
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
+        onBackPressed()
         auth = FirebaseAuth.getInstance()
-        dbr = FirebaseDatabase.getInstance().getReference("users")
+        dbr = FirebaseDatabase.getInstance().getReference(getString(R.string.path_users))
         errorName = getString(R.string.nameError)
         errorPassword = getString(R.string.errorPassword)
         errorText = getString(R.string.inputError)
@@ -85,7 +86,6 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
                 dbr.child(uid).setValue(user)
                 LocaleStorage.getObject().setIsSigned(true)
                 LocaleStorage.getObject().setEmailNPassword(email, password)
-                nextScreen(LoginScreenDirections.actionLoginScreenToMainScreen())
                 nextScreen(RegistrationScreenDirections.actionRegistrationScreenToMainScreen())
 
             } else {

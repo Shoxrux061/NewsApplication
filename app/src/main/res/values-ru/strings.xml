@@ -69,4 +69,8 @@
     <string name="logout">Выйти</string>
     <string name="want_logout">Вы хотите выйти?</string>
     <string name="double_tap">Нажмите еще раз для выхода</string>
+    <string name="edit_profile">Изменить Профиль</string>
+    <string name="full_name">Полное Имя</string>
+    <string name="phone_number">Номер Телефона</string>
+    <string name="success_is_edited">Изменено</string>
 </resources>
