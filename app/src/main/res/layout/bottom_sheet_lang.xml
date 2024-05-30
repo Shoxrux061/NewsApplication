@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_gravity="bottom"
+    android:layout_width="match_parent"
+    android:background="@drawable/bottom_sheet_back"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/choose_lang"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginVertical="20dp"
+        android:textSize="15sp"
+        android:layout_height="wrap_content"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/radio_group_lang"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:background="@drawable/ripple"
+            android:text="@string/eng"
+            android:id="@+id/rd_eng"
+            android:layout_marginHorizontal="10dp"
+            android:textSize="13sp"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:background="@drawable/ripple"
+            android:text="@string/ru"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/rd_ru"
+            android:layout_marginVertical="10dp"
+            android:textSize="13sp"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:background="@drawable/ripple"
+            android:text="@string/system"
+            android:id="@+id/rd_system"
+            android:layout_marginHorizontal="10dp"
+            android:textSize="13sp"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_height="wrap_content"/>
+
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:background="@drawable/btn_back"
+        android:layout_marginHorizontal="20dp"
+        android:visibility="gone"
+        android:id="@+id/confirm_button_lang"
+        android:text="@string/confirm"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_marginVertical="20dp"
+        android:layout_height="50dp"/>
+
+</LinearLayout>

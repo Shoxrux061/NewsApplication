@@ -73,4 +73,12 @@
     <string name="full_name">Полное Имя</string>
     <string name="phone_number">Номер Телефона</string>
     <string name="success_is_edited">Изменено</string>
+    <string name="text_language">Язык</string>
+    <string name="system">Системный</string>
+    <string name="SelectTheme">Выберите Режим Темы</string>
+    <string name="choose_lang">Выберите Язык</string>
+    <string name="theme_black">Темная Тема</string>
+    <string name="white_theme">Светлая Тема</string>
+    <string name="system_theme">Системная Тема</string>
+    <string name="confirm">Применить</string>
 </resources>

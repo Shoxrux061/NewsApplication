@@ -13,11 +13,14 @@ import uz.isystem.newsapplication.data.cache.LocaleStorage
 import uz.isystem.newsapplication.databinding.PageSettingsBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
 import uz.isystem.newsapplication.presentation.main.MainScreenDirections
+import uz.isystem.newsapplication.presentation.main.settings.dialog.ChooseThemeBottomSheet
 
 class SettingsPage : BaseFragment(R.layout.page_settings) {
     private lateinit var auth: FirebaseAuth
     private val binding by viewBinding(PageSettingsBinding::bind)
+    private lateinit var themeBottomSheet: ChooseThemeBottomSheet
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
+        themeBottomSheet = ChooseThemeBottomSheet()
         auth = FirebaseAuth.getInstance()
         listenActions()
 
@@ -30,7 +33,13 @@ class SettingsPage : BaseFragment(R.layout.page_settings) {
         binding.logoutBtn.setOnClickListener {
             showDialog()
         }
+        binding.notificationBtn.setOnClickListener {
+            binding.switchNotification.isChecked = (!binding.switchNotification.isChecked)
+        }
 
+        binding.themeBtn.setOnClickListener {
+            themeBottomSheet.show(childFragmentManager, "ThemeBottomSheet")
+        }
     }
 
     private fun showDialog() {
