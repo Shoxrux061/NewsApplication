@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.data.cache.LocaleStorage
+import uz.isystem.newsapplication.data.model.user.UserDetailsModel
 import uz.isystem.newsapplication.data.model.user.UserModel
 import uz.isystem.newsapplication.databinding.ScreenRegistrationBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
@@ -83,7 +84,11 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
                     email = email,
                     name = name
                 )
-                dbr.child(uid).setValue(user)
+                dbr.child(uid).child(getString(R.string.path_details)).setValue(user)
+                val userDetails = UserDetailsModel(
+                    userName = name
+                )
+                dbr.child(uid).child(getString(R.string.path_details)).setValue(userDetails)
                 LocaleStorage.getObject().setIsSigned(true)
                 LocaleStorage.getObject().setEmailNPassword(email, password)
                 nextScreen(RegistrationScreenDirections.actionRegistrationScreenToMainScreen())

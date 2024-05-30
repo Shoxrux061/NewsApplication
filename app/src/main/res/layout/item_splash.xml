@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:weightSum="4"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_height="match_parent">
-    
+    android:weightSum="4">
+
     <ImageView
+        android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/image"
+        android:layout_weight="3"
         android:scaleType="centerCrop"
-        android:src="@drawable/splash1_image"
-        android:layout_weight="3"/>
+        android:src="@drawable/splash1_image" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:layout_margin="20dp"
+        android:layout_height="0dp"
         android:layout_gravity="start"
-        android:layout_height="0dp">
+        android:layout_margin="20dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_marginTop="20dp"
             android:id="@+id/title1"
-            android:textColor="@color/textColor"
-            android:text="Lorem Ipsum is simply \ndummy"
-            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_black"
-            android:layout_height="wrap_content"/>
+            android:text="Lorem Ipsum is simply \ndummy"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:textColor="#535353"
             android:id="@+id/title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
-            android:textSize="13sp"
             android:text="Lorem Ipsum is simply dummy text of \nthe printing and typesetting industry."
-            android:layout_height="wrap_content"/>
+            android:textColor="#535353"
+            android:textSize="13sp" />
 
     </LinearLayout>
-    
+
 
 </LinearLayout>

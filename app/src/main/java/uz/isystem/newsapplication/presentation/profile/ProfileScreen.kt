@@ -1,20 +1,34 @@
 package uz.isystem.newsapplication.presentation.profile
 
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.READ_MEDIA_IMAGES
+import android.Manifest.permission.READ_MEDIA_VIDEO
+import android.Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.data.cache.LocaleStorage
 import uz.isystem.newsapplication.data.model.user.UserDetailsModel
 import uz.isystem.newsapplication.databinding.ScreenProfileBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
+import java.io.File
 
 class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     private val binding by viewBinding(ScreenProfileBinding::bind)
@@ -22,18 +36,36 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     private lateinit var vel: ValueEventListener
     private var isLoading = false
     private var isViewDestroyed = false
+    private lateinit var fbs: StorageReference
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
+        auth = FirebaseAuth.getInstance()
+        fbs = FirebaseStorage.getInstance().getReference(auth.currentUser?.uid ?: "")
+            .child(auth.currentUser!!.uid)
         dbr = FirebaseDatabase.getInstance().getReference(getString(R.string.path_users))
-
+            .child(auth.currentUser?.uid ?: "")
+            .child(getString(R.string.path_details))
         if (!isLoading) {
             getDataInDB()
         }
         actionsListener()
+
     }
 
     private fun getDataInDB() {
         setLoading(true)
+
+        val localFile = File.createTempFile("images", "jpg")
+
+        fbs.getFile(localFile).addOnSuccessListener {
+            if (isViewDestroyed) return@addOnSuccessListener
+            val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+            binding.iamge.setImageBitmap(bitmap)
+
+        }.addOnFailureListener {
+            binding.iamge.setImageResource(R.drawable.person_placeholder)
+        }
         vel = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (isViewDestroyed) return
@@ -55,7 +87,7 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
             }
         }
 
-        dbr.child(getString(R.string.path_details)).addValueEventListener(vel)
+        dbr.addValueEventListener(vel)
     }
 
     private fun actionsListener() {
@@ -70,6 +102,35 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
 
         binding.cacnel.setOnClickListener {
             setEditable(false)
+        }
+
+        binding.addImage.setOnClickListener {
+            pickImage()
+        }
+    }
+
+    private fun pickImage() {
+        val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
+        startActivityForResult(intent, 101)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 101) {
+                if (isViewDestroyed) return
+
+                val uri = data?.data
+                binding.iamge.setImageURI(uri)
+                setLoading(true)
+                fbs.putFile(uri!!).addOnCompleteListener { result ->
+                    if (result.isSuccessful) {
+                        setLoading(false)
+                    } else {
+                        setLoading(false)
+                    }
+                }
+            }
         }
     }
 
@@ -98,9 +159,10 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
         )
 
         setLoading(true)
-        dbr.child(getString(R.string.path_details)).setValue(data).addOnCompleteListener {
+        dbr.setValue(data).addOnCompleteListener {
             if (it.isSuccessful) {
-                Toast.makeText(context, getString(R.string.success_is_edited), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.success_is_edited), Toast.LENGTH_SHORT)
+                    .show()
                 setLoading(false)
             } else {
                 setLoading(false)
@@ -131,9 +193,11 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
             binding.progressBar.visibility = View.VISIBLE
             binding.parent.alpha = 0.5f
             setEditable(false)
+            binding.editBtn.isClickable = false
         } else {
             binding.progressBar.visibility = View.GONE
             binding.parent.alpha = 1f
+            binding.editBtn.isClickable = true
         }
     }
 
