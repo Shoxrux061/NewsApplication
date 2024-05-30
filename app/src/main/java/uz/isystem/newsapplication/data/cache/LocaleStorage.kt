@@ -55,7 +55,7 @@ class LocaleStorage private constructor(context: Context) {
     fun getEmail():String{
         return sharedPreferences!!.getString(keyEmail,"")!!
     }
-    fun getPassword():String{
+    /*fun getPassword():String{
         return sharedPreferences!!.getString(keyPassword,"")!!
-    }
+    }*/
 }

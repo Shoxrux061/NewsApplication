@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,53 +21,59 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     private lateinit var dbr: DatabaseReference
     private lateinit var vel: ValueEventListener
     private var isLoading = false
+    private var isViewDestroyed = false
+
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         dbr = FirebaseDatabase.getInstance().getReference(getString(R.string.path_users))
-        getDataInDB()
+
+        if (!isLoading) {
+            getDataInDB()
+        }
         actionsListener()
     }
 
     private fun getDataInDB() {
+        setLoading(true)
+        vel = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (isViewDestroyed) return
 
-        binding.emailEdt.setText(LocaleStorage.getObject().getEmail())
+                val userDetails = snapshot.getValue(UserDetailsModel::class.java)
+                binding.usernmaeEdt.setText(userDetails?.userName ?: "")
+                binding.fullNameEdt.setText(userDetails?.fullName ?: "")
+                binding.phoneNumberEdt.setText(userDetails?.phoneNumber ?: "")
+                binding.emailEdt.setText(LocaleStorage.getObject().getEmail())
+                setLoading(false)
+            }
 
-        vel = dbr.child(getString(R.string.path_details))
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.getValue(UserDetailsModel::class.java).let {
-                        binding.usernmaeEdt.setText(it?.userName ?: "")
-                        binding.fullNameEdt.setText(it?.fullName ?: "")
-                        binding.phoneNumberEdt.setText(it?.phoneNumber ?: "")
-                    }
-                }
+            override fun onCancelled(error: DatabaseError) {
+                if (isViewDestroyed) return
 
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(context, "Canceled", Toast.LENGTH_SHORT).show()
-                    Log.d("TagError", "onCancelled: $error")
-                }
-            })
+                Toast.makeText(context, "Canceled", Toast.LENGTH_SHORT).show()
+                Log.d("TagError", "onCancelled: $error")
+                setLoading(false)
+            }
+        }
+
+        dbr.child(getString(R.string.path_details)).addValueEventListener(vel)
     }
 
     private fun actionsListener() {
         binding.editBtn.setOnClickListener {
             setEditable(true)
-            binding.confirmBtn.visibility = View.VISIBLE
-            it.visibility = View.GONE
         }
         binding.confirmBtn.setOnClickListener {
-
+            if (!isLoading) {
+                checkIsEdited()
+            }
         }
 
         binding.cacnel.setOnClickListener {
             setEditable(false)
-            it.visibility = View.INVISIBLE
         }
     }
 
     private fun checkIsEdited() {
-
-        Toast.makeText(context, "IsClick", Toast.LENGTH_SHORT).show()
-
         if (binding.fullNameEdt.text.isBlank()) {
             binding.fullNameEdt.error = getString(R.string.inputError)
             return
@@ -82,7 +87,7 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
 
         val username = binding.usernmaeEdt.text.toString()
         val fullName = binding.fullNameEdt.text.toString()
-        val phoneNumber = binding.fullNameEdt.text.toString()
+        val phoneNumber = binding.phoneNumberEdt.text.toString()
         val email = LocaleStorage.getObject().getEmail()
 
         val data = UserDetailsModel(
@@ -91,15 +96,16 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
             phoneNumber = phoneNumber,
             email = email
         )
+
+        setLoading(true)
         dbr.child(getString(R.string.path_details)).setValue(data).addOnCompleteListener {
             if (it.isSuccessful) {
-                Toast.makeText(context, getString(R.string.success_is_edited), Toast.LENGTH_SHORT)
-                    .show()
-                findNavController().popBackStack()
-            } else{
-                Toast.makeText(
-                    context, it.exception.toString(), Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(context, getString(R.string.success_is_edited), Toast.LENGTH_SHORT).show()
+                setLoading(false)
+            } else {
+                setLoading(false)
+                Toast.makeText(context, "Canceled", Toast.LENGTH_SHORT).show()
+                Log.d("TAGError", "checkIsEdited: ${it.exception}")
             }
         }
     }
@@ -108,6 +114,37 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
         binding.fullNameEdt.isEnabled = isEditable
         binding.usernmaeEdt.isEnabled = isEditable
         binding.phoneNumberEdt.isEnabled = isEditable
+        if (isEditable) {
+            binding.editBtn.visibility = View.GONE
+            binding.confirmBtn.visibility = View.VISIBLE
+            binding.cacnel.visibility = View.VISIBLE
+        } else {
+            binding.editBtn.visibility = View.VISIBLE
+            binding.confirmBtn.visibility = View.GONE
+            binding.cacnel.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        this.isLoading = isLoading
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.parent.alpha = 0.5f
+            setEditable(false)
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.parent.alpha = 1f
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        isViewDestroyed = true
+        if (::dbr.isInitialized && ::vel.isInitialized) {
+            Log.d("ProfileScreen", "Removing event listener")
+            dbr.removeEventListener(vel)
+        } else {
+            Log.d("ProfileScreen", "dbr or vel is not initialized")
+        }
     }
 }
-

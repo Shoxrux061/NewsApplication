@@ -79,6 +79,6 @@
     <string name="phone_number">Phone Number</string>
     <string name="path_users" translatable="false">users</string>
     <string name="success_is_edited">Edited</string>
-    <string name="path_details">path_details</string>
+    <string name="path_details" translatable="false">path_details</string>
 
 </resources>
