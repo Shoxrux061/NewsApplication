@@ -1,9 +1,7 @@
 package uz.isystem.newsapplication.presentation.search
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -21,7 +19,7 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
 
     private val binding by viewBinding(ScreenSearchBinding::bind)
     private val viewModel: SearchViewModel by viewModels()
-    private val adapter = SeeAllAdapter()
+    private val adapter = SeeAllAdapter(requireContext())
     private var isLoading = false
     private val args: SearchScreenArgs by navArgs()
     private lateinit var lang: String
@@ -72,7 +70,7 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
                 search(binding.searchEdt.text.toString())
             }
         }
-        binding.search.setOnClickListener {
+        binding.filterBtn.setOnClickListener {
             nextScreen(SearchScreenDirections.actionSearchPageToFilterScreen())
         }
 
@@ -140,13 +138,13 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
 
     private fun hideLoading() {
         binding.progressBar.visibility = View.GONE
-        binding.search.isClickable = true
+        binding.filterBtn.isClickable = true
         binding.paginateProgress.visibility = View.GONE
     }
 
     private fun showLoading() {
         binding.progressBar.visibility = View.VISIBLE
-        binding.search.isClickable = false
+        binding.filterBtn.isClickable = false
     }
 
     private fun nextScreen(navDirections: NavDirections) {

@@ -12,6 +12,7 @@ data class RoomArticles(
     @ColumnInfo("title") val title:String,
     @ColumnInfo("description") val description:String?,
     @ColumnInfo("publishedAt") val publishedAt:String?,
+    @ColumnInfo("content") val content:String?,
     @PrimaryKey
     @ColumnInfo("url") val url:String,
 )

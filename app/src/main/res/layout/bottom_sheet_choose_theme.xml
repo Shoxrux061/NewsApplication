@@ -2,151 +2,149 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bottom_sheet_back"
     android:layout_gravity="bottom"
+    android:background="@drawable/bottom_sheet_back"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
-        android:textSize="15sp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="@string/SelectTheme"
         android:fontFamily="@font/poppins_black"
+        android:text="@string/SelectTheme"
         android:textColor="@color/textColor"
-        android:layout_height="wrap_content"/>
+        android:textSize="15sp" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="150dp">
 
         <RadioGroup
-            android:layout_width="match_parent"
-            android:weightSum="3"
-            android:padding="20dp"
             android:id="@+id/theme_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            android:padding="20dp"
+            android:weightSum="3">
 
             <RadioButton
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="10dp"
-                android:button="@null"
                 android:id="@+id/white_theme"
-                android:background="@drawable/theme_selector"
-                android:checked="true"
-                android:layout_height="100dp"/>
-
-            <RadioButton
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:id="@+id/dark_theme"
-                android:button="@null"
+                android:layout_height="100dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/theme_selector"
-                android:layout_height="100dp"/>
+                android:button="@null" />
 
             <RadioButton
+                android:id="@+id/dark_theme"
                 android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:button="@null"
-                android:id="@+id/system_theme"
                 android:background="@drawable/theme_selector"
-                android:layout_height="100dp"/>
+                android:button="@null" />
+
+            <RadioButton
+                android:id="@+id/system_theme"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:background="@drawable/theme_selector"
+                android:button="@null" />
 
 
         </RadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:weightSum="3"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:padding="20dp"
             android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            android:padding="20dp"
+            android:weightSum="3">
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_height="100dp"
                 android:layout_marginEnd="10dp"
-                android:orientation="vertical"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:layout_height="100dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_sun"
                     android:layout_marginBottom="10dp"
-                    android:layout_height="35dp"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_sun" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:textColor="@color/textColor"
-                    android:fontFamily="@font/poppins_medium"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="13sp"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/white_theme"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/textColor"
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_height="100dp"
                 android:layout_marginEnd="10dp"
-                android:orientation="vertical"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:layout_height="100dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_moon"
-                    android:scaleType="centerCrop"
                     android:layout_marginBottom="10dp"
-                    android:layout_height="35dp"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_moon" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:textColor="@color/textColor"
-                    android:fontFamily="@font/poppins_medium"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="13sp"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/theme_black"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/textColor"
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
+                android:layout_height="100dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
                 android:gravity="center"
-                android:layout_height="100dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_settings"
                     android:layout_marginBottom="10dp"
                     android:scaleType="centerCrop"
-                    android:layout_height="35dp"/>
+                    android:src="@drawable/ic_settings" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:textColor="@color/textColor"
-                    android:fontFamily="@font/poppins_medium"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="13sp"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/system_theme"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/textColor"
+                    android:textSize="13sp" />
 
             </LinearLayout>
-
 
         </LinearLayout>
 

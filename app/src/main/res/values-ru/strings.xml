@@ -77,8 +77,11 @@
     <string name="system">Системный</string>
     <string name="SelectTheme">Выберите Режим Темы</string>
     <string name="choose_lang">Выберите Язык</string>
-    <string name="theme_black">Темная Тема</string>
+    <string name="theme_black">Тёмная Тема</string>
     <string name="white_theme">Светлая Тема</string>
     <string name="system_theme">Системная Тема</string>
     <string name="confirm">Применить</string>
+    <string name="title_dark">Тёмная</string>
+    <string name="title_white">Светлая</string>
+    <string name="title_system">Системная</string>
 </resources>

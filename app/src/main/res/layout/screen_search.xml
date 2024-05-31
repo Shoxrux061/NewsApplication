@@ -1,78 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.search.SearchScreen">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_marginTop="40dp"
-        app:cardCornerRadius="30dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_height="50dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_height="50dp">
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginStart="10dp"
-            android:hint="@string/search"
-            android:paddingBottom="3dp"
-            android:id="@+id/search_edt"
-            android:fontFamily="@font/poppins_regular"
-            android:inputType="text"
-            android:backgroundTint="#00FFFFFF"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textColor="@color/textColor"
+                android:paddingTop="4dp"
+                android:id="@+id/search_edt"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingStart="10dp"
+                android:hint="@string/search"
+                android:background="@drawable/edt_frame"
+                android:layout_weight="1"/>
             <ImageButton
-                android:layout_width="50dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_search"
-                android:id="@+id/search"
-                android:background="?selectableItemBackgroundBorderless"
-                android:layout_height="50dp"/>
+                android:layout_width="45dp"
+                android:layout_marginHorizontal="10dp"
+                android:src="@drawable/ic_filter"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:id="@+id/filter_btn"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_back"
+                android:layout_height="45dp"/>
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:id="@+id/recycler_view"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
     </LinearLayout>
 
 
     <com.facebook.shimmer.ShimmerFrameLayout
-        android:layout_width="match_parent"
         android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="100dp"
-        android:visibility="gone"
-        android:layout_height="match_parent">
+        android:visibility="gone">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <include layout="@layout/shimmer_categories"/>
+
+            <include layout="@layout/shimmer_categories" />
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <ProgressBar
+        android:id="@+id/paginate_progress"
         android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="50dp"
-        android:visibility="gone"
-        android:id="@+id/paginate_progress"
-        android:layout_height="50dp"/>
+        android:visibility="gone" />
 
 </FrameLayout>

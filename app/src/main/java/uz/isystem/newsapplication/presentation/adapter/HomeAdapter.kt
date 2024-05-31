@@ -1,12 +1,21 @@
 package uz.isystem.newsapplication.presentation.adapter
 
+import android.content.Context
+import android.content.res.Resources
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import dagger.hilt.android.qualifiers.ApplicationContext
 import uz.isystem.newsapplication.R
+import uz.isystem.newsapplication.data.cache.LocaleStorage
 import uz.isystem.newsapplication.data.model.everything.Article
 import uz.isystem.newsapplication.databinding.HomeItemBinding
+import java.text.SimpleDateFormat
+import java.util.Locale
+import javax.inject.Inject
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
@@ -19,6 +28,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         this.data.addAll(data)
         notifyDataSetChanged()
     }
+
 
     inner class ViewHolder(private val binding: HomeItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

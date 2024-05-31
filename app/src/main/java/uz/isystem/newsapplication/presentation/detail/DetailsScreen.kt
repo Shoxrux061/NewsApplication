@@ -58,7 +58,8 @@ class DetailsScreen : BaseFragment(R.layout.screen_details) {
                     title = args.title,
                     description = args.description,
                     publishedAt = args.publishedAt,
-                    author = args.author
+                    author = args.author,
+                    content = args.content
                 )
                 room?.addNews(data)
             } else {
@@ -76,7 +77,7 @@ class DetailsScreen : BaseFragment(R.layout.screen_details) {
 
             startActivity(Intent.createChooser(intent, "Share link via"))
         }
-        binding.link.setOnClickListener{
+        binding.link.setOnClickListener {
             val alertDialogBuilder = AlertDialog.Builder(requireContext())
 
             alertDialogBuilder.setTitle(getString(R.string.app_name))
@@ -108,7 +109,7 @@ class DetailsScreen : BaseFragment(R.layout.screen_details) {
         binding.author.isSelected = true
         binding.content.text = args.content
         binding.publishedAt.text = formatDate(args.publishedAt)
-        binding.image.load(args.imageUrl){
+        binding.image.load(args.imageUrl) {
             placeholder(R.drawable.placeholder)
             error(R.drawable.placeholder)
         }
@@ -117,6 +118,4 @@ class DetailsScreen : BaseFragment(R.layout.screen_details) {
         val author = "${getString(R.string.by)}: ${args.author}"
         binding.author.text = author
     }
-
 }
-

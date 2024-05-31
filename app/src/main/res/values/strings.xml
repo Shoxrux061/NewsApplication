@@ -87,8 +87,11 @@
     <string name="SelectTheme">Select Theme Mode</string>
     <string name="choose_lang">Choose Language</string>
     <string name="theme_black">Dark Theme</string>
-    <string name="white_theme">White Theme</string>
+    <string name="white_theme">Light Theme</string>
     <string name="system_theme">System Theme</string>
     <string name="confirm">Confirm</string>
+    <string name="title_dark">Dark</string>
+    <string name="title_white">Light</string>
+    <string name="title_system">System</string>
 
 </resources>
