@@ -19,7 +19,7 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
 
     private val binding by viewBinding(ScreenSearchBinding::bind)
     private val viewModel: SearchViewModel by viewModels()
-    private val adapter = SeeAllAdapter(requireContext())
+    private val adapter by lazy { SeeAllAdapter(requireContext()) }
     private var isLoading = false
     private val args: SearchScreenArgs by navArgs()
     private lateinit var lang: String

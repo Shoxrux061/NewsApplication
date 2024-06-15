@@ -15,7 +15,7 @@ import uz.isystem.newsapplication.presentation.base.BaseFragment
 class SeeAllScreen : BaseFragment(R.layout.screen_see_all) {
     private val binding by viewBinding(ScreenSeeAllBinding::bind)
     private val viewModel: SeeAllViewModel by viewModels()
-    private val adapter by lazy { SeeAllAdapter() }
+    private val adapter by lazy { SeeAllAdapter(requireContext()) }
     private val args: SeeAllScreenArgs by navArgs()
     private var isLoading = false
     private lateinit var lang: String
