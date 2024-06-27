@@ -65,6 +65,7 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
     private fun setActions() {
         binding.searchEdt.addTextChangedListener {
             if (!isLoading && binding.searchEdt.text.isNotBlank()) {
+                adapter.clearData()
                 isLoading = true
                 showLoading()
                 search(binding.searchEdt.text.toString())

@@ -82,7 +82,7 @@ class ChooseLanguageBottomSheet : BottomSheetDialogFragment() {
 
         confirmButton.setOnClickListener {
             cache.setLanguage(lang)
-            if(lang == Locale.getDefault().language) {
+            if (lang == Locale.getDefault().language) {
                 it.visibility = View.GONE
                 return@setOnClickListener
             }

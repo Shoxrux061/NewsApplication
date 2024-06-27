@@ -93,5 +93,6 @@
     <string name="title_dark">Dark</string>
     <string name="title_white">Light</string>
     <string name="title_system">System</string>
+    <string name="path_saved" translatable="false">saved</string>
 
 </resources>

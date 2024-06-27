@@ -24,6 +24,11 @@ class SeeAllAdapter(private val context:Context) : RecyclerView.Adapter<SeeAllAd
         notifyDataSetChanged()
     }
 
+    fun clearData(){
+        this.data.clear()
+        notifyDataSetChanged()
+    }
+
     private fun formatDate(inputDate: String): String {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
         val date = inputFormat.parse(inputDate)

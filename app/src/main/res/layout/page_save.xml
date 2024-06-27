@@ -7,11 +7,39 @@
     android:background="@color/background_color"
     tools:context=".presentation.main.saved.SavePage">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textSize="16sp"
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center|bottom"
+                android:layout_gravity="center|bottom"
+                android:paddingBottom="20dp"
+                android:text="@string/saved"
+                android:layout_height="100dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:alpha="0.5"
+            android:background="@color/textColor"/>
+
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/empty"

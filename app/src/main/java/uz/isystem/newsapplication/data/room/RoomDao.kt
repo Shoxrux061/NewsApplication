@@ -14,11 +14,16 @@ interface RoomDao {
     fun addNews(data: RoomArticles)
 
     @Query("SELECT url FROM news")
-    fun getAllUrl():List<String>
+    fun getAllUrl(): List<String>
 
     @Query("DELETE FROM news WHERE url=:id")
-    fun deleteByUrl(id:String)
+    fun deleteByUrl(id: String)
 
     @Query("SELECT * FROM news WHERE url = :id")
     fun getNewsByUrl(id: String): RoomArticles
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addAllNews(data: List<RoomArticles>)
+    @Query("DELETE FROM news")
+    fun deleteAllNews()
 }

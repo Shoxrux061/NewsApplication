@@ -132,6 +132,10 @@ class FilterScreen : BaseFragment(R.layout.screen_filter) {
     }
 
     private fun isValidDate(dateString: String): Boolean {
+
+        if (dateString.isEmpty()) {
+            return true
+        }
         return try {
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             LocalDate.parse(dateString, formatter)
@@ -142,6 +146,11 @@ class FilterScreen : BaseFragment(R.layout.screen_filter) {
     }
 
     private fun compareDates(dateString1: String, dateString2: String): Int {
+
+        if (dateString2.isBlank() && dateString1.isBlank()) {
+            return -1
+        }
+
         return try {
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val date1 = LocalDate.parse(dateString1, formatter)

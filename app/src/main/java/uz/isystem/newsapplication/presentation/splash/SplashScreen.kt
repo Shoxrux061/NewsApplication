@@ -23,11 +23,12 @@ import java.util.Locale
 class SplashScreen : BaseFragment(R.layout.screen_splash) {
     private lateinit var cache: LocaleStorage
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
+
         cache = LocaleStorage.getObject()
 
+        checkIsFirst()
         setLanguage()
         checkCache()
-        checkIsFirst()
 
     }
 

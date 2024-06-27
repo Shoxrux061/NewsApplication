@@ -13,7 +13,7 @@ class LocaleStorage private constructor(context: Context) {
     private val keyLanguage = "KEY_LANGUAGE"
 
     init {
-        sharedPreferences = context.getSharedPreferences("cache", Context.MODE_PRIVATE)
+        sharedPreferences = context.getSharedPreferences("news_cache", Context.MODE_PRIVATE)
     }
 
     companion object {
@@ -32,17 +32,23 @@ class LocaleStorage private constructor(context: Context) {
     }
 
     fun setIsSigned(isSigned: Boolean) {
-        if(!isSigned){
+        if (!isSigned) {
             sharedPreferences!!.edit().remove(keyPassword).apply()
             sharedPreferences!!.edit().remove(keyEmail).apply()
         }
         sharedPreferences!!.edit().putBoolean(keyIsSigned, isSigned).apply()
     }
 
-    fun setIsNotFirst(){
-        sharedPreferences!!.edit().putBoolean(keyIsFirst,false).apply()
+    /*
+    fun clearAllData() {
+        sharedPreferences?.edit()?.clear()?.apply()
+    }*/
+
+    fun setIsNotFirst() {
+        sharedPreferences!!.edit().putBoolean(keyIsFirst, false).apply()
     }
-    fun getIsFirst():Boolean{
+
+    fun getIsFirst(): Boolean {
         return sharedPreferences!!.getBoolean(keyIsFirst, true)
     }
 
@@ -54,21 +60,24 @@ class LocaleStorage private constructor(context: Context) {
         sharedPreferences!!.edit().putString(keyEmail, email).apply()
         sharedPreferences!!.edit().putString(keyPassword, password).apply()
     }
-    fun getEmail():String{
-        return sharedPreferences!!.getString(keyEmail,"")!!
+
+    fun getEmail(): String {
+        return sharedPreferences!!.getString(keyEmail, "")!!
     }
 
-    fun setTheme(theme:Int){
-        sharedPreferences!!.edit().putInt(keyTheme,theme).apply()
-    }
-    fun getTheme():Int{
-        return sharedPreferences!!.getInt(keyTheme,0)
+    fun setTheme(theme: Int) {
+        sharedPreferences!!.edit().putInt(keyTheme, theme).apply()
     }
 
-    fun setLanguage(lang:String){
-        sharedPreferences!!.edit().putString(keyLanguage,lang).apply()
+    fun getTheme(): Int {
+        return sharedPreferences!!.getInt(keyTheme, 0)
     }
-    fun getLanguage():String{
-        return sharedPreferences!!.getString(keyLanguage,"system")!!
+
+    fun setLanguage(lang: String) {
+        sharedPreferences!!.edit().putString(keyLanguage, lang).apply()
+    }
+
+    fun getLanguage(): String {
+        return sharedPreferences!!.getString(keyLanguage, "system")!!
     }
 }
