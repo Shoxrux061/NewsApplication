@@ -65,7 +65,7 @@
     <string name="to">To</string>
     <string name="notifications">Notifications</string>
     <string name="theme">Theme</string>
-    <string name="about_uss">About uss</string>
+    <string name="about_uss">Informations</string>
     <string name="logout">Logout</string>
     <string name="want_logout">Du you want to logout?</string>
     <string name="double_tap">Double tap to quit</string>
@@ -84,5 +84,8 @@
     <string name="title_dark">Dark</string>
     <string name="title_white">Light</string>
     <string name="title_system">System</string>
+    <string name="version">Version 1.0.0</string>
+    <string name="info">Headline Hub is a modern news application that delivers real-time updates and stories from around the globe. With our app, you can effortlessly stay informed about the latest events wherever you are.\n\n Key Features: \n\t Up-to-date News: Receive fresh news across various categories. \n\tNews Categorization: Explore topics such as politics, economy, culture, sports, and more. \n\tPersonalization: Customize your news feed based on your interests. \n\tSave Articles: Bookmark articles for offline reading. \n\tDark Mode: Support for dark theme for comfortable reading during nighttime. \n\tMultilingual Support: Choose your preferred language for news display.\n\nAdvantages: \n\t User-friendly Interface: Intuitive design for seamless navigation. \n\tHigh Speed: Quick access to news even on slow internet connections. \n\tReliable Sources: News sourced from trusted and authoritative outlets. \n\tHeadline Hub empowers you to stay up-to-date with current events and news, offering convenient and fast access to information that matters to you.</string>
+    <string name="contact_us">Contact Us</string>
 
 </resources>

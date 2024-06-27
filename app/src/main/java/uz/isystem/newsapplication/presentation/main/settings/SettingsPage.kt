@@ -65,6 +65,9 @@ class SettingsPage : BaseFragment(R.layout.page_settings) {
         binding.languageBtn.setOnClickListener {
             langBottomSheet.show(childFragmentManager, "LanguageBottomSheet")
         }
+        binding.aboutBtn.setOnClickListener {
+            findNavController().navigate(MainScreenDirections.actionMainScreenToAboutScreen())
+        }
     }
 
     private fun showDialog() {

@@ -123,15 +123,32 @@ class DetailsScreen : BaseFragment(R.layout.screen_details) {
         }
 
         binding.author.isSelected = true
-        binding.content.text = args.content
         binding.publishedAt.text = formatDate(args.publishedAt)
         binding.image.load(args.imageUrl) {
             placeholder(R.drawable.placeholder)
             error(R.drawable.placeholder)
         }
-        binding.title.text = args.title
-        binding.description.text = args.description
-        val author = "${getString(R.string.by)}: ${args.author}"
+        if (args.content !="null"){
+            binding.content.text = args.content
+
+        }else{
+            binding.content.text = "..."
+        }
+        if (args.title!="null"){
+            binding.title.text = args.title
+        }else{
+            binding.title.text = "..."
+        }
+        if(args.description !="null") {
+            binding.description.text = args.description
+        }else{
+            binding.description.text = "..."
+        }
+        val author = if(args.author != "null") {
+             "${getString(R.string.by)}: ${args.author}"
+        } else {
+            "unknown"
+        }
         binding.author.text = author
     }
 

@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_mainScreen_to_loginScreen"
             app:destination="@id/loginScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_aboutScreen"
+            app:destination="@id/aboutScreen" />
     </fragment>
     <fragment
         android:id="@+id/detailsScreen"
@@ -154,4 +157,9 @@
             android:id="@+id/action_splashScreen_to_registrationScreen"
             app:destination="@id/registrationScreen" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutScreen"
+        android:name="uz.isystem.newsapplication.presentation.about.AboutScreen"
+        android:label="screen_about"
+        tools:layout="@layout/screen_about" />
 </navigation>
