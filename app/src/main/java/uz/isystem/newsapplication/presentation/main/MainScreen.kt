@@ -3,7 +3,6 @@ package uz.isystem.newsapplication.presentation.main
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -44,8 +43,14 @@ class MainScreen : BaseFragment(R.layout.screen_main){
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val currentItem = binding.viewPager.currentItem
+                val navCurrentItem = binding.bottomNavigation.selectedItemId
                 if (currentItem > 0) {
                     binding.viewPager.currentItem--
+                    if(navCurrentItem == R.id.profileID){
+                        binding.bottomNavigation.selectedItemId = R.id.savedID
+                    }else if(navCurrentItem == R.id.savedID){
+                        binding.bottomNavigation.selectedItemId = R.id.popularID
+                    }
                 } else {
                     if (doubleBackToExitPressedOnce) {
                         requireActivity().finish()

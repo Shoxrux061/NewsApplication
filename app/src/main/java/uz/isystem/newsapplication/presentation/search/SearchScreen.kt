@@ -1,15 +1,19 @@
 package uz.isystem.newsapplication.presentation.search
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.Job
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.databinding.ScreenSearchBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
@@ -22,12 +26,42 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
     private val adapter by lazy { SeeAllAdapter(requireContext()) }
     private var isLoading = false
     private val args: SearchScreenArgs by navArgs()
+    private var enteredWord = ""
     private lateinit var lang: String
     private var sortBy = ""
     private var searchIn = ""
     private var from = ""
     private var to = ""
     private var q = ""
+
+    private val searchDelayMillis = 300L
+
+
+    private val handler = Handler(Looper.getMainLooper())
+    private var searchJob: Job? = null
+
+
+    private val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+        override fun afterTextChanged(s: Editable?) {
+            handler.removeCallbacks(searchRunnable)
+            enteredWord = s?.toString() ?: ""
+            if (!isLoading && s?.isNotBlank() == true) {
+                isLoading = true
+                showLoading()
+                handler.postDelayed(searchRunnable, searchDelayMillis)
+            }
+        }
+    }
+
+    private val searchRunnable = Runnable {
+        search(enteredWord)
+    }
+
+
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         lang = getString(R.string.language)
         onBackPressed()
@@ -63,14 +97,17 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
     }
 
     private fun setActions() {
-        binding.searchEdt.addTextChangedListener {
+        /*binding.searchEdt.addTextChangedListener {
+            enteredWord = binding.searchEdt.text.toString()
             if (!isLoading && binding.searchEdt.text.isNotBlank()) {
                 adapter.clearData()
                 isLoading = true
                 showLoading()
-                search(binding.searchEdt.text.toString())
+                search(enteredWord)
             }
-        }
+        }*/
+
+        binding.searchEdt.addTextChangedListener(textWatcher)
         binding.filterBtn.setOnClickListener {
             nextScreen(SearchScreenDirections.actionSearchPageToFilterScreen())
         }
@@ -166,5 +203,10 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
                     nextScreen(SearchScreenDirections.actionSearchPageToMainScreen())
                 }
             })
+    }
+
+    override fun onDestroy() {
+        handler.removeCallbacks(searchRunnable)
+        super.onDestroy()
     }
 }
