@@ -171,10 +171,12 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
         binding.usernmaeEdt.isEnabled = isEditable
         binding.phoneNumberEdt.isEnabled = isEditable
         if (isEditable) {
+            if (isViewDestroyed) return
             binding.editBtn.visibility = View.GONE
             binding.confirmBtn.visibility = View.VISIBLE
             binding.cacnel.visibility = View.VISIBLE
         } else {
+            if (isViewDestroyed) return
             binding.editBtn.visibility = View.VISIBLE
             binding.confirmBtn.visibility = View.GONE
             binding.cacnel.visibility = View.INVISIBLE
@@ -184,11 +186,13 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     private fun setLoading(isLoading: Boolean) {
         this.isLoading = isLoading
         if (isLoading) {
+            if (isViewDestroyed) return
             binding.progressBar.visibility = View.VISIBLE
             binding.parent.alpha = 0.5f
             setEditable(false)
             binding.editBtn.isClickable = false
         } else {
+            if (isViewDestroyed) return
             binding.progressBar.visibility = View.GONE
             binding.parent.alpha = 1f
             binding.editBtn.isClickable = true

@@ -82,6 +82,9 @@ class FilterScreen : BaseFragment(R.layout.screen_filter) {
         binding.toDatePicker.setOnClickListener {
             showDatePickerDialog(binding.to)
         }
+        binding.backBtn.setOnClickListener{
+            findNavController().popBackStack()
+        }
     }
 
     private fun checkValid(): Boolean {
