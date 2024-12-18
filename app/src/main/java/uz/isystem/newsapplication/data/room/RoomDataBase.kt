@@ -19,7 +19,9 @@ abstract class RoomDataBase : RoomDatabase() {
                 ).allowMainThreadQueries().build()
             }
         }
+
         fun getInstance() = db?.getDao()
     }
+
     abstract fun getDao(): RoomDao
 }

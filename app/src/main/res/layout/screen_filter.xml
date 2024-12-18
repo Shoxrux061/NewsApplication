@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/background_color"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.search.filtr.FilterScreen">
+    android:background="@drawable/dialog_back"
+    tools:context=".presentation.search.filtr.FilterDialog">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,17 +20,17 @@
             android:layout_marginTop="50dp"
             android:layout_marginBottom="10dp"
             android:background="?selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_cancel" />
 
         <EditText
+            android:id="@+id/searchEdt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="20dp"
-            android:maxLines="1"
-            android:id="@+id/searchEdt"
             android:backgroundTint="#8F8F8F"
             android:fontFamily="@font/poppins_regular"
-            android:hint="@string/key_word" />
+            android:hint="@string/key_word"
+            android:maxLines="1" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,20 +43,20 @@
             android:textSize="14sp" />
 
         <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/radioGroup"
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/in_title"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/rd_btn_selector"
-                android:id="@+id/in_title"
-                android:checked="true"
                 android:button="@null"
+                android:checked="true"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
                 android:paddingHorizontal="20dp"
@@ -66,12 +66,12 @@
                 android:textSize="14sp" />
 
             <RadioButton
+                android:id="@+id/in_description"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/rd_btn_selector"
                 android:button="@null"
-                android:id="@+id/in_description"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
                 android:paddingHorizontal="20dp"
@@ -81,12 +81,12 @@
                 android:textSize="14sp" />
 
             <RadioButton
+                android:id="@+id/in_content"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/rd_btn_selector"
                 android:button="@null"
-                android:id="@+id/in_content"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
                 android:paddingHorizontal="20dp"
@@ -97,11 +97,11 @@
         </RadioGroup>
 
         <Spinner
-            android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
             android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_height="wrap_content" />
+            android:layout_marginTop="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -120,36 +120,38 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins_medium"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/from"
             android:textColor="@color/textColor"
             android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="20dp"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="20dp">
+
             <com.vicmikhailau.maskededittext.MaskedEditText
-                android:layout_width="0dp"
-                android:backgroundTint="#8F8F8F"
-                android:hint="@string/format"
-                app:mask="####-##-##"
                 android:id="@+id/from"
-                android:maxLines="1"
-                android:inputType="date"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="@color/textColor"
                 android:layout_marginEnd="10dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:backgroundTint="#8F8F8F"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="@string/format"
+                android:inputType="date"
+                android:maxLines="1"
+                android:textColor="@color/textColor"
+                app:mask="####-##-##" />
+
             <ImageButton
-                android:layout_width="24dp"
                 android:id="@+id/from_date_picker"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_calendar"
                 android:background="?selectableItemBackgroundBorderless"
-                android:layout_height="24dp"/>
+                android:src="@drawable/ic_calendar" />
         </LinearLayout>
 
         <TextView
@@ -157,51 +159,55 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_medium"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/to"
             android:textColor="@color/textColor"
             android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="20dp"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="20dp">
+
             <com.vicmikhailau.maskededittext.MaskedEditText
-                android:layout_width="0dp"
-                android:backgroundTint="#8F8F8F"
-                android:hint="@string/format"
-                android:maxLines="1"
-                android:inputType="date"
-                app:mask="####-##-##"
-                android:layout_height="match_parent"
                 android:id="@+id/to"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="@color/textColor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:backgroundTint="#8F8F8F"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="@string/format"
+                android:inputType="date"
+                android:maxLines="1"
+                android:textColor="@color/textColor"
+                app:mask="####-##-##" />
+
             <ImageButton
-                android:layout_width="24dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_calendar"
                 android:id="@+id/to_date_picker"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
                 android:background="?selectableItemBackgroundBorderless"
-                android:layout_height="24dp"/>
+                android:src="@drawable/ic_calendar" />
+
         </LinearLayout>
 
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/search_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_back"
+            android:text="@string/search"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_back"
-        android:text="@string/search"
-        android:textAllCaps="false"
-        android:id="@+id/search_btn"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
+    </LinearLayout>
 
 </FrameLayout>

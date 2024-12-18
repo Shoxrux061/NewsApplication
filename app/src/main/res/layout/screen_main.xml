@@ -20,13 +20,14 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_gravity="bottom"
-        android:background="@color/background_color"
+        android:background="@color/nav_bar_color"
         android:gravity="center">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/nav_bar_color"
             app:itemIconSize="25sp"
             app:itemIconTint="@color/textColor"
             app:itemTextColor="@color/textColor"

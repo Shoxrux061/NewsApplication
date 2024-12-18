@@ -15,20 +15,18 @@ import uz.isystem.newsapplication.data.cache.LocaleStorage
 import uz.isystem.newsapplication.databinding.PageSettingsBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
 import uz.isystem.newsapplication.presentation.main.MainScreenDirections
-import uz.isystem.newsapplication.presentation.main.settings.dialog.ChooseLanguageBottomSheet
 import uz.isystem.newsapplication.presentation.main.settings.dialog.ChooseThemeBottomSheet
 
 class SettingsPage : BaseFragment(R.layout.page_settings) {
     private lateinit var auth: FirebaseAuth
     private val binding by viewBinding(PageSettingsBinding::bind)
     private lateinit var themeBottomSheet: ChooseThemeBottomSheet
-    private lateinit var langBottomSheet: ChooseLanguageBottomSheet
-    private lateinit var cache : LocaleStorage
+    private lateinit var cache: LocaleStorage
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         cache = LocaleStorage.getObject()
         themeBottomSheet = ChooseThemeBottomSheet()
-        langBottomSheet = ChooseLanguageBottomSheet()
         auth = FirebaseAuth.getInstance()
         checkCache()
         listenActions()
@@ -36,15 +34,10 @@ class SettingsPage : BaseFragment(R.layout.page_settings) {
     }
 
     private fun checkCache() {
-        when(cache.getTheme()){
-            0->binding.themeTitle.text = getString(R.string.title_system)
-            1->binding.themeTitle.text = getString(R.string.title_dark)
-            2->binding.themeTitle.text = getString(R.string.title_white)
-        }
-        when(cache.getLanguage()){
-            "ru"->binding.languageTytle.text = getString(R.string.ru)
-            "eng"->binding.languageTytle.text = getString(R.string.eng)
-            "system"->binding.languageTytle.text = getString(R.string.system)
+        when (cache.getTheme()) {
+            0 -> binding.themeTitle.text = getString(R.string.title_system)
+            1 -> binding.themeTitle.text = getString(R.string.title_dark)
+            2 -> binding.themeTitle.text = getString(R.string.title_white)
         }
     }
 
@@ -55,16 +48,11 @@ class SettingsPage : BaseFragment(R.layout.page_settings) {
         binding.logoutBtn.setOnClickListener {
             showDialog()
         }
-        binding.notificationBtn.setOnClickListener {
-            binding.switchNotification.isChecked = (!binding.switchNotification.isChecked)
-        }
 
         binding.themeBtn.setOnClickListener {
             themeBottomSheet.show(childFragmentManager, "ThemeBottomSheet")
         }
-        binding.languageBtn.setOnClickListener {
-            langBottomSheet.show(childFragmentManager, "LanguageBottomSheet")
-        }
+
         binding.aboutBtn.setOnClickListener {
             findNavController().navigate(MainScreenDirections.actionMainScreenToAboutScreen())
         }

@@ -15,4 +15,5 @@
     <color name="rd_btn_color2">#353535</color>
     <color name="rd_select_color">#90B8FD</color>
     <color name="rd_theme_color">#FFFFFF</color>
+    <color name="nav_bar_color">#F1EBF5</color>
 </resources>

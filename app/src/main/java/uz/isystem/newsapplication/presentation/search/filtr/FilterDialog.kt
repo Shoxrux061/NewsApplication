@@ -1,37 +1,45 @@
 package uz.isystem.newsapplication.presentation.search.filtr
 
 import android.app.DatePickerDialog
-import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.vicmikhailau.maskededittext.MaskedEditText
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.data.model.FilterModel
 import uz.isystem.newsapplication.databinding.ScreenFilterBinding
-import uz.isystem.newsapplication.presentation.base.BaseFragment
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import java.util.Calendar
 
-@RequiresApi(Build.VERSION_CODES.O)
 
-class FilterScreen : BaseFragment(R.layout.screen_filter) {
+class FilterDialog : BottomSheetDialogFragment(R.layout.screen_filter) {
 
     private val binding by viewBinding(ScreenFilterBinding::bind)
-    override fun onCreate(view: View, savedInstanceState: Bundle?) {
+    private var filterData: FilterModel? = null
+    lateinit var onSearchClick: (FilterModel) -> Unit
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.screen_filter, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setSpinnerData()
         listenActions()
-
     }
+
 
     private fun listenActions() {
         binding.searchBtn.setOnClickListener {
@@ -64,8 +72,7 @@ class FilterScreen : BaseFragment(R.layout.screen_filter) {
                         sortBy = getString(R.string.popularity_key)
                     }
                 }
-                binding.spinner.selectedItem
-                val filterData = FilterModel(
+                filterData = FilterModel(
                     searchIn = searchIn,
                     sortBy = sortBy,
                     q = binding.searchEdt.text.toString(),
@@ -73,7 +80,8 @@ class FilterScreen : BaseFragment(R.layout.screen_filter) {
                     to = binding.to.toString(),
                     isBack = true
                 )
-                nextScreen(FilterScreenDirections.actionFilterScreenToSearchPage(filterData))
+                onSearchClick.invoke(filterData!!)
+                dismiss()
             }
         }
         binding.fromDatePicker.setOnClickListener {
@@ -82,8 +90,8 @@ class FilterScreen : BaseFragment(R.layout.screen_filter) {
         binding.toDatePicker.setOnClickListener {
             showDatePickerDialog(binding.to)
         }
-        binding.backBtn.setOnClickListener{
-            findNavController().popBackStack()
+        binding.backBtn.setOnClickListener {
+            dismiss()
         }
     }
 
@@ -136,6 +144,10 @@ class FilterScreen : BaseFragment(R.layout.screen_filter) {
 
     private fun isValidDate(dateString: String): Boolean {
 
+        if (dateString.length < 10) {
+            return false
+        }
+
         if (dateString.isEmpty()) {
             return true
         }
@@ -172,15 +184,5 @@ class FilterScreen : BaseFragment(R.layout.screen_filter) {
         )
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, data)
         binding.spinner.adapter = adapter
-    }
-
-    private fun nextScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in)
-            .setExitAnim(R.anim.slide_out)
-            .setPopEnterAnim(R.anim.slide_in_reverse)
-            .setPopExitAnim(R.anim.slide_out_reverse)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
     }
 }

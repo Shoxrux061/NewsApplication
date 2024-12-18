@@ -70,13 +70,6 @@
             android:id="@+id/action_searchPage_to_detailsScreen"
             app:destination="@id/detailsScreen" />
         <action
-            android:id="@+id/action_searchPage_to_filterScreen"
-            app:destination="@id/filterScreen" />
-        <argument android:name="data"
-            app:argType="uz.isystem.newsapplication.data.model.FilterModel"
-            app:nullable="true"
-            android:defaultValue="@null" />
-        <action
             android:id="@+id/action_searchPage_to_mainScreen"
             app:destination="@id/mainScreen" />
     </fragment>
@@ -124,15 +117,6 @@
         <action
             android:id="@+id/action_seeAllScreen_to_detailsScreen"
             app:destination="@id/detailsScreen" />
-    </fragment>
-    <fragment
-        android:id="@+id/filterScreen"
-        android:name="uz.isystem.newsapplication.presentation.search.filtr.FilterScreen"
-        android:label="screen_filter"
-        tools:layout="@layout/screen_filter" >
-        <action
-            android:id="@+id/action_filterScreen_to_searchPage"
-            app:destination="@id/searchPage" />
     </fragment>
     <fragment
         android:id="@+id/profileScreen"

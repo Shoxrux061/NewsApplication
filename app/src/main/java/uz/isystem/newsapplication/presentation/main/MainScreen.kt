@@ -5,19 +5,23 @@ import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.databinding.ScreenMainBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
 
-class MainScreen : BaseFragment(R.layout.screen_main){
+class MainScreen : BaseFragment(R.layout.screen_main) {
     private val binding by viewBinding(ScreenMainBinding::bind)
     private var doubleBackToExitPressedOnce = false
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
 
+        requireActivity().window.navigationBarColor = requireContext().getColor(R.color.nav_bar_color)
+
         setPager()
         onBackPressed()
     }
+
     private fun setPager() {
         val adapter = MainAdapter(childFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
@@ -28,9 +32,11 @@ class MainScreen : BaseFragment(R.layout.screen_main){
                 R.id.popularID -> {
                     binding.viewPager.setCurrentItem(0, true)
                 }
+
                 R.id.savedID -> {
                     binding.viewPager.setCurrentItem(1, true)
                 }
+
                 else -> {
                     binding.viewPager.setCurrentItem(2, true)
                 }
@@ -40,33 +46,37 @@ class MainScreen : BaseFragment(R.layout.screen_main){
     }
 
     private fun onBackPressed() {
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                val currentItem = binding.viewPager.currentItem
-                val navCurrentItem = binding.bottomNavigation.selectedItemId
-                if (currentItem > 0) {
-                    binding.viewPager.currentItem--
-                    if(navCurrentItem == R.id.profileID){
-                        binding.bottomNavigation.selectedItemId = R.id.savedID
-                    }else if(navCurrentItem == R.id.savedID){
-                        binding.bottomNavigation.selectedItemId = R.id.popularID
-                    }
-                } else {
-                    if (doubleBackToExitPressedOnce) {
-                        requireActivity().finish()
-                        return
-                    }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val currentItem = binding.viewPager.currentItem
+                    val navCurrentItem = binding.bottomNavigation.selectedItemId
+                    if (currentItem > 0) {
+                        binding.viewPager.currentItem--
+                        if (navCurrentItem == R.id.profileID) {
+                            binding.bottomNavigation.selectedItemId = R.id.savedID
+                        } else if (navCurrentItem == R.id.savedID) {
+                            binding.bottomNavigation.selectedItemId = R.id.popularID
+                        }
+                    } else {
+                        if (doubleBackToExitPressedOnce) {
+                            requireActivity().finish()
+                            return
+                        }
 
-                    doubleBackToExitPressedOnce = true
-                    Toast.makeText(requireContext(), getString(R.string.double_tap), Toast.LENGTH_SHORT).show()
+                        doubleBackToExitPressedOnce = true
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.double_tap),
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-                    Handler().postDelayed({
-                        doubleBackToExitPressedOnce = false
-                    }, 2000)
+                        Handler().postDelayed({
+                            doubleBackToExitPressedOnce = false
+                        }, 2000)
+                    }
                 }
-            }
-        })
+            })
     }
-
-
 }

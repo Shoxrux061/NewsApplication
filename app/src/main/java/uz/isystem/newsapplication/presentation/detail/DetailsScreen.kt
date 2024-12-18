@@ -30,6 +30,7 @@ class DetailsScreen : BaseFragment(R.layout.screen_details) {
     private lateinit var dbr: DatabaseReference
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
 
+        requireActivity().window.navigationBarColor = requireContext().getColor(R.color.background_color)
         setFirebase()
         setData()
         setActions()
@@ -128,24 +129,24 @@ class DetailsScreen : BaseFragment(R.layout.screen_details) {
             placeholder(R.drawable.placeholder)
             error(R.drawable.placeholder)
         }
-        if (args.content !="null"){
+        if (args.content != "null") {
             binding.content.text = args.content
 
-        }else{
+        } else {
             binding.content.text = "..."
         }
-        if (args.title!="null"){
+        if (args.title != "null") {
             binding.title.text = args.title
-        }else{
+        } else {
             binding.title.text = "..."
         }
-        if(args.description !="null") {
+        if (args.description != "null") {
             binding.description.text = args.description
-        }else{
+        } else {
             binding.description.text = "..."
         }
-        val author = if(args.author != "null") {
-             "${getString(R.string.by)}: ${args.author}"
+        val author = if (args.author != "null") {
+            "${getString(R.string.by)}: ${args.author}"
         } else {
             "unknown"
         }

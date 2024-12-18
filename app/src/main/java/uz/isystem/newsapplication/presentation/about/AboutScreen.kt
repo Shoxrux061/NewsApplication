@@ -8,6 +8,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.databinding.ScreenAboutBinding
@@ -17,6 +18,8 @@ class AboutScreen : BaseFragment(R.layout.screen_about) {
     private val binding by viewBinding(ScreenAboutBinding::bind)
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
 
+        requireActivity().window.navigationBarColor =
+            ContextCompat.getColor(requireContext(), R.color.background_color)
         listenActions()
 
     }

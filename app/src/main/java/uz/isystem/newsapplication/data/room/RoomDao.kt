@@ -7,6 +7,7 @@ import androidx.room.Query
 
 @Dao
 interface RoomDao {
+
     @Query("SELECT * FROM news")
     fun getAllSaved(): List<RoomArticles>
 
@@ -24,6 +25,7 @@ interface RoomDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addAllNews(data: List<RoomArticles>)
+
     @Query("DELETE FROM news")
     fun deleteAllNews()
 }
