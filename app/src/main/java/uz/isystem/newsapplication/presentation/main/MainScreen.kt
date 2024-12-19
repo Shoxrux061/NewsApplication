@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.databinding.ScreenMainBinding
@@ -16,7 +17,8 @@ class MainScreen : BaseFragment(R.layout.screen_main) {
     private var doubleBackToExitPressedOnce = false
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
 
-        requireActivity().window.navigationBarColor = requireContext().getColor(R.color.nav_bar_color)
+        requireActivity().window.navigationBarColor =
+            requireContext().getColor(R.color.nav_bar_color)
 
         setPager()
         onBackPressed()

@@ -12,31 +12,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:textSize="16sp"
-                android:textColor="@color/textColor"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="center|bottom"
-                android:layout_gravity="center|bottom"
-                android:paddingBottom="20dp"
-                android:text="@string/saved"
-                android:layout_height="100dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center|bottom"
+            android:paddingBottom="20dp"
+            android:text="@string/saved"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:alpha="0.5"
-            android:background="@color/textColor"/>
-
-
+            android:background="@color/textColor" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_category" />
 
     </LinearLayout>
 
@@ -50,5 +50,11 @@
         android:textColor="@color/textColor"
         android:textSize="18sp"
         android:visibility="gone" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/progress_bar"
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>

@@ -1,13 +1,17 @@
 package uz.isystem.newsapplication.presentation.profile
 
-import android.app.Activity.RESULT_OK
-import android.content.Intent
+import android.Manifest
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat.checkSelfPermission
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -32,8 +36,23 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     private var isViewDestroyed = false
     private lateinit var fbs: StorageReference
     private lateinit var auth: FirebaseAuth
+    private var selectedUri: Uri? = null
+
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                launchImagePicker()
+            } else {
+                Toast.makeText(requireContext(), "No Permission", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    private lateinit var getContent: ActivityResultLauncher<String>
+
 
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
+        registerLauncher()
         auth = FirebaseAuth.getInstance()
         fbs = FirebaseStorage.getInstance().getReference(auth.currentUser?.uid ?: "")
             .child(auth.currentUser!!.uid)
@@ -45,6 +64,27 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
         }
         actionsListener()
 
+    }
+
+    private fun registerLauncher() {
+        getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            uri?.let {
+                binding.iamge.setImageURI(uri)
+                selectedUri = uri
+                setLoading(true)
+                putImageOnFbs()
+            }
+        }
+    }
+
+    private fun putImageOnFbs() {
+        fbs.putFile(selectedUri!!).addOnCompleteListener { result ->
+            if (result.isSuccessful) {
+                setLoading(false)
+            } else {
+                setLoading(false)
+            }
+        }
     }
 
     private fun getDataInDB() {
@@ -99,34 +139,10 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
         }
 
         binding.addImage.setOnClickListener {
-            pickImage()
+            checkAndRequestPermission()
         }
     }
 
-    private fun pickImage() {
-        val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
-        startActivityForResult(intent, 101)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 101) {
-                if (isViewDestroyed) return
-
-                val uri = data?.data
-                binding.iamge.setImageURI(uri)
-                setLoading(true)
-                fbs.putFile(uri!!).addOnCompleteListener { result ->
-                    if (result.isSuccessful) {
-                        setLoading(false)
-                    } else {
-                        setLoading(false)
-                    }
-                }
-            }
-        }
-    }
 
     private fun checkIsEdited() {
         if (binding.fullNameEdt.text.isBlank()) {
@@ -164,6 +180,39 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
                 Log.d("TAGError", "checkIsEdited: ${it.exception}")
             }
         }
+    }
+
+    private fun checkAndRequestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            when {
+                checkPermission(Manifest.permission.READ_MEDIA_IMAGES) -> {
+                    if (isViewDestroyed) return
+                    launchImagePicker()
+                }
+
+                else -> {
+                    requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+                }
+            }
+        } else {
+            if (checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                if (isViewDestroyed) return
+                launchImagePicker()
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
+        }
+    }
+
+    private fun checkPermission(permission: String): Boolean {
+        return checkSelfPermission(
+            requireContext(),
+            permission
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun launchImagePicker() {
+        getContent.launch("image/*")
     }
 
     private fun setEditable(isEditable: Boolean) {

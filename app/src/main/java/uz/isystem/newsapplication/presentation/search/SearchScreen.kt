@@ -99,10 +99,12 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
             adapter.setData(it!!.articles)
             isLoading = false
             hideLoading()
+            binding.placeHolder.visibility = View.GONE
         }
         viewModel.errorResponseEvery.observe(viewLifecycleOwner) {
             isLoading = false
             hideLoading()
+            binding.placeHolder.visibility = View.GONE
         }
     }
 

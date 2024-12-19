@@ -38,7 +38,6 @@ class SavePage : BaseFragment(R.layout.page_save) {
     }
 
     private fun checkInternet() {
-        Log.d("TAGNet", "checkInternet: ${isNetworkAvailable(requireContext())}")
         if (isNetworkAvailable(requireContext())) {
             getFirebaseData()
         } else {
@@ -93,6 +92,11 @@ class SavePage : BaseFragment(R.layout.page_save) {
                 }
                 room!!.deleteAllNews()
                 room.addAllNews(articlesList)
+                if (articlesList.isEmpty()) {
+                    binding.empty.visibility = View.VISIBLE
+                }
+                binding.progressBar.visibility = View.GONE
+                binding.empty.visibility = View.GONE
                 adapter.setData(articlesList)
             }
 
