@@ -1,12 +1,8 @@
 package uz.isystem.newsapplication.presentation.main.settings
 
 import android.app.AlertDialog
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.RequiresApi
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -14,6 +10,7 @@ import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.data.cache.LocaleStorage
 import uz.isystem.newsapplication.databinding.PageSettingsBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
+import uz.isystem.newsapplication.presentation.extations.changeScreen
 import uz.isystem.newsapplication.presentation.main.MainScreenDirections
 import uz.isystem.newsapplication.presentation.main.settings.dialog.ChooseThemeBottomSheet
 
@@ -23,7 +20,6 @@ class SettingsPage : BaseFragment(R.layout.page_settings) {
     private lateinit var themeBottomSheet: ChooseThemeBottomSheet
     private lateinit var cache: LocaleStorage
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         cache = LocaleStorage.getObject()
         themeBottomSheet = ChooseThemeBottomSheet()
@@ -43,7 +39,7 @@ class SettingsPage : BaseFragment(R.layout.page_settings) {
 
     private fun listenActions() {
         binding.profileBtn.setOnClickListener {
-            nextScreen(MainScreenDirections.actionMainScreenToProfileScreen())
+            findNavController().changeScreen(MainScreenDirections.actionMainScreenToProfileScreen())
         }
         binding.logoutBtn.setOnClickListener {
             showDialog()
@@ -54,7 +50,7 @@ class SettingsPage : BaseFragment(R.layout.page_settings) {
         }
 
         binding.aboutBtn.setOnClickListener {
-            findNavController().navigate(MainScreenDirections.actionMainScreenToAboutScreen())
+            findNavController().changeScreen(MainScreenDirections.actionMainScreenToAboutScreen())
         }
     }
 
@@ -67,7 +63,7 @@ class SettingsPage : BaseFragment(R.layout.page_settings) {
         alertDialogBuilder.setPositiveButton(getString(R.string.yes)) { dialog, _ ->
             auth.signOut()
             LocaleStorage.getObject().setIsSigned(false)
-            nextScreen(MainScreenDirections.actionMainScreenToLoginScreen())
+            findNavController().changeScreen(MainScreenDirections.actionMainScreenToLoginScreen())
             dialog.dismiss()
         }
 
@@ -76,15 +72,5 @@ class SettingsPage : BaseFragment(R.layout.page_settings) {
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
-    }
-
-    private fun nextScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in)
-            .setExitAnim(R.anim.slide_out)
-            .setPopEnterAnim(R.anim.slide_in_reverse)
-            .setPopExitAnim(R.anim.slide_out_reverse)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
     }
 }

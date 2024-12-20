@@ -3,14 +3,13 @@ package uz.isystem.newsapplication.presentation.seeAll
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.databinding.ScreenSeeAllBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
+import uz.isystem.newsapplication.presentation.extations.changeScreen
 
 class SeeAllScreen : BaseFragment(R.layout.screen_see_all) {
     private val binding by viewBinding(ScreenSeeAllBinding::bind)
@@ -21,9 +20,9 @@ class SeeAllScreen : BaseFragment(R.layout.screen_see_all) {
     private lateinit var lang: String
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         lang = getString(R.string.language)
-        if(args.category != "top") {
+        if (args.category != "top") {
             binding.category.text = args.category.capitalize()
-        }else{
+        } else {
             binding.category.text = getString(R.string.trending).capitalize()
         }
         setAdapter()
@@ -43,7 +42,7 @@ class SeeAllScreen : BaseFragment(R.layout.screen_see_all) {
             sendRequest()
         }
         adapter.onClickItem = {
-            nextScreen(
+            findNavController().changeScreen(
                 SeeAllScreenDirections.actionSeeAllScreenToDetailsScreen(
                     title = it.title.toString(),
                     publishedAt = it.publishedAt,
@@ -89,13 +88,4 @@ class SeeAllScreen : BaseFragment(R.layout.screen_see_all) {
         }
     }
 
-    private fun nextScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in)
-            .setExitAnim(R.anim.slide_out)
-            .setPopEnterAnim(R.anim.slide_in_reverse)
-            .setPopExitAnim(R.anim.slide_out_reverse)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
-    }
 }

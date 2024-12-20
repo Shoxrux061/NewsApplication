@@ -3,26 +3,25 @@ package uz.isystem.newsapplication.presentation.main.home.category.entertainment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.databinding.FragmentEntertainmentBinding
 import uz.isystem.newsapplication.presentation.adapter.CategoryAdapter
 import uz.isystem.newsapplication.presentation.base.BaseFragment
+import uz.isystem.newsapplication.presentation.extations.changeScreen
 import uz.isystem.newsapplication.presentation.main.MainScreenDirections
 import uz.isystem.newsapplication.presentation.main.home.category.CategoryViewModel
 
-class EntertainmentFragment : BaseFragment(R.layout.fragment_entertainment){
+class EntertainmentFragment : BaseFragment(R.layout.fragment_entertainment) {
     private val binding by viewBinding(FragmentEntertainmentBinding::bind)
-    private val viewModel : CategoryViewModel by viewModels()
-    private val adapter by lazy{ CategoryAdapter(requireContext()) }
+    private val viewModel: CategoryViewModel by viewModels()
+    private val adapter by lazy { CategoryAdapter(requireContext()) }
     private var isFirst = true
 
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
 
-        if(isFirst){
+        if (isFirst) {
             viewModel.getCategories(getString(R.string.language), "entertainment")
         }
         setAdapter()
@@ -33,15 +32,15 @@ class EntertainmentFragment : BaseFragment(R.layout.fragment_entertainment){
     }
 
     private fun observe() {
-        viewModel.successResponseEvery.observe(viewLifecycleOwner){
+        viewModel.successResponseEvery.observe(viewLifecycleOwner) {
             setShimmer()
             adapter.setData(it!!.articles)
         }
     }
 
     private fun listenActions() {
-        adapter.onClickItem={
-            nextScreen(
+        adapter.onClickItem = {
+            findNavController().changeScreen(
                 MainScreenDirections.actionMainScreenToDetailsScreen(
                     title = it.title.toString(),
                     publishedAt = it.publishedAt,
@@ -63,13 +62,5 @@ class EntertainmentFragment : BaseFragment(R.layout.fragment_entertainment){
         binding.shimmer.visibility = View.GONE
         binding.recyclerView.visibility = View.VISIBLE
     }
-    private fun nextScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in)
-            .setExitAnim(R.anim.slide_out)
-            .setPopEnterAnim(R.anim.slide_in_reverse)
-            .setPopExitAnim(R.anim.slide_out_reverse)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
-    }
+
 }

@@ -1,14 +1,11 @@
 package uz.isystem.newsapplication.presentation.main.home.category
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
-import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.data.model.everything.EverythingResponse
 import uz.isystem.newsapplication.domain.repository.NewsRepository
 import uz.isystem.newsapplication.utills.Constants

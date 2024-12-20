@@ -30,12 +30,12 @@ import java.io.File
 
 class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     private val binding by viewBinding(ScreenProfileBinding::bind)
-    private lateinit var dbr: DatabaseReference
-    private lateinit var vel: ValueEventListener
+    private var dbr: DatabaseReference? = null
+    private var vel: ValueEventListener? = null
     private var isLoading = false
     private var isViewDestroyed = false
-    private lateinit var fbs: StorageReference
-    private lateinit var auth: FirebaseAuth
+    private var fbs: StorageReference? = null
+    private var auth: FirebaseAuth? = null
     private var selectedUri: Uri? = null
 
 
@@ -44,8 +44,7 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
             if (isGranted) {
                 launchImagePicker()
             } else {
-                Toast.makeText(requireContext(), "No Permission", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(requireContext(), "No Permission", Toast.LENGTH_SHORT).show()
             }
         }
     private lateinit var getContent: ActivityResultLauncher<String>
@@ -54,10 +53,10 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         registerLauncher()
         auth = FirebaseAuth.getInstance()
-        fbs = FirebaseStorage.getInstance().getReference(auth.currentUser?.uid ?: "")
-            .child(auth.currentUser!!.uid)
+        fbs = FirebaseStorage.getInstance().getReference(auth?.currentUser?.uid ?: "")
+            .child(auth?.currentUser!!.uid)
         dbr = FirebaseDatabase.getInstance().getReference(getString(R.string.path_users))
-            .child(auth.currentUser?.uid ?: "")
+            .child(auth?.currentUser?.uid ?: "")
             .child(getString(R.string.path_details))
         if (!isLoading) {
             getDataInDB()
@@ -78,7 +77,7 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     }
 
     private fun putImageOnFbs() {
-        fbs.putFile(selectedUri!!).addOnCompleteListener { result ->
+        fbs?.putFile(selectedUri!!)?.addOnCompleteListener { result ->
             if (result.isSuccessful) {
                 setLoading(false)
             } else {
@@ -92,12 +91,12 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
 
         val localFile = File.createTempFile("images", "jpg")
 
-        fbs.getFile(localFile).addOnSuccessListener {
+        fbs?.getFile(localFile)?.addOnSuccessListener {
             if (isViewDestroyed) return@addOnSuccessListener
             val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
             binding.iamge.setImageBitmap(bitmap)
 
-        }.addOnFailureListener {
+        }?.addOnFailureListener {
             binding.iamge.setImageResource(R.drawable.person_placeholder)
         }
         vel = object : ValueEventListener {
@@ -121,7 +120,9 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
             }
         }
 
-        dbr.addValueEventListener(vel)
+        vel?.let {
+            dbr?.addValueEventListener(it)
+        }
     }
 
     private fun actionsListener() {
@@ -169,7 +170,7 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
         )
 
         setLoading(true)
-        dbr.setValue(data).addOnCompleteListener {
+        dbr?.setValue(data)?.addOnCompleteListener {
             if (it.isSuccessful) {
                 Toast.makeText(context, getString(R.string.success_is_edited), Toast.LENGTH_SHORT)
                     .show()
@@ -251,11 +252,8 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     override fun onDestroyView() {
         super.onDestroyView()
         isViewDestroyed = true
-        if (::dbr.isInitialized && ::vel.isInitialized) {
-            Log.d("ProfileScreen", "Removing event listener")
-            dbr.removeEventListener(vel)
-        } else {
-            Log.d("ProfileScreen", "dbr or vel is not initialized")
+        vel?.let {
+            dbr?.removeEventListener(it)
         }
     }
 }

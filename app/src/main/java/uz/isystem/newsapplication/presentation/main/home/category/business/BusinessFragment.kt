@@ -1,31 +1,27 @@
 package uz.isystem.newsapplication.presentation.main.home.category.business
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.databinding.FragmentBusinessBinding
 import uz.isystem.newsapplication.presentation.adapter.CategoryAdapter
 import uz.isystem.newsapplication.presentation.base.BaseFragment
+import uz.isystem.newsapplication.presentation.extations.changeScreen
 import uz.isystem.newsapplication.presentation.main.MainScreenDirections
 import uz.isystem.newsapplication.presentation.main.home.category.CategoryViewModel
 
-class BusinessFragment : BaseFragment(R.layout.fragment_business){
+class BusinessFragment : BaseFragment(R.layout.fragment_business) {
 
     private val binding by viewBinding(FragmentBusinessBinding::bind)
-    private val viewModel : CategoryViewModel by viewModels()
-    private val adapter by lazy{CategoryAdapter(requireContext())}
+    private val viewModel: CategoryViewModel by viewModels()
+    private val adapter by lazy { CategoryAdapter(requireContext()) }
     private var isFirst = true
 
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
-        if(isFirst){
+        if (isFirst) {
             viewModel.getCategories(getString(R.string.language), "business")
         }
         listenActions()
@@ -36,8 +32,8 @@ class BusinessFragment : BaseFragment(R.layout.fragment_business){
     }
 
     private fun listenActions() {
-        adapter.onClickItem={
-            nextScreen(
+        adapter.onClickItem = {
+            findNavController().changeScreen(
                 MainScreenDirections.actionMainScreenToDetailsScreen(
                     title = it.title.toString(),
                     publishedAt = it.publishedAt,
@@ -57,7 +53,7 @@ class BusinessFragment : BaseFragment(R.layout.fragment_business){
     }
 
     private fun observe() {
-        viewModel.successResponseEvery.observe(viewLifecycleOwner){
+        viewModel.successResponseEvery.observe(viewLifecycleOwner) {
             setShimmer()
             adapter.setData(it!!.articles)
         }
@@ -66,13 +62,5 @@ class BusinessFragment : BaseFragment(R.layout.fragment_business){
     private fun setAdapter() {
         binding.recyclerView.adapter = adapter
     }
-    private fun nextScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in)
-            .setExitAnim(R.anim.slide_out)
-            .setPopEnterAnim(R.anim.slide_in_reverse)
-            .setPopExitAnim(R.anim.slide_out_reverse)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
-    }
+
 }

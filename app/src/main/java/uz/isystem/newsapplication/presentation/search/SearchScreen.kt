@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.databinding.ScreenSearchBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
-import uz.isystem.newsapplication.presentation.extations.changeScreen
 import uz.isystem.newsapplication.presentation.search.filtr.FilterDialog
 import uz.isystem.newsapplication.presentation.seeAll.SeeAllAdapter
 
@@ -47,7 +46,6 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
             sortBy = it.sortBy ?: ""
             binding.searchEdt.setText(it.q)
             search(it.q)
-
         }
 
         binding.searchEdt.addTextChangedListener {
@@ -80,7 +78,7 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
         }
         adapter.onClickItem = {
 
-            findNavController().changeScreen(
+            findNavController().navigate(
                 SearchScreenDirections.actionSearchPageToDetailsScreen(
                     title = it.title!!,
                     url = it.url!!,
@@ -89,7 +87,16 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
                     publishedAt = it.publishedAt,
                     author = it.author ?: "unknown",
                     content = it.content!!
-                )
+                ),
+                NavOptions.Builder()
+                    .setPopUpTo(
+                        R.id.searchPage,
+                        false
+                    ).setEnterAnim(R.anim.slide_in)
+                    .setExitAnim(R.anim.slide_out)
+                    .setPopEnterAnim(R.anim.slide_in_reverse)
+                    .setPopExitAnim(R.anim.slide_out_reverse)
+                    .build()
             )
         }
     }

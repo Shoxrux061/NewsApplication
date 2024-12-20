@@ -3,8 +3,6 @@ package uz.isystem.newsapplication.presentation.main.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.tabs.TabLayout
@@ -15,6 +13,7 @@ import uz.isystem.newsapplication.databinding.PageHomeBinding
 import uz.isystem.newsapplication.presentation.adapter.HomeAdapter
 import uz.isystem.newsapplication.presentation.adapter.TabAdapter
 import uz.isystem.newsapplication.presentation.base.BaseFragment
+import uz.isystem.newsapplication.presentation.extations.changeScreen
 import uz.isystem.newsapplication.presentation.main.MainScreenDirections
 
 class HomePage : BaseFragment(R.layout.page_home) {
@@ -30,14 +29,10 @@ class HomePage : BaseFragment(R.layout.page_home) {
         }
         isFirst = false
         setAdapter()
-        setTabLayout()
         observe()
         setActions()
     }
 
-    private fun setTabLayout() {
-
-    }
 
     private fun setAdapter() {
         val adapter = TabAdapter(childFragmentManager, lifecycle)
@@ -91,19 +86,19 @@ class HomePage : BaseFragment(R.layout.page_home) {
     private fun setActions() {
 
         binding.searchBtn.setOnClickListener {
-            nextScreen(MainScreenDirections.actionMainScreenToSearchPage())
+            findNavController().changeScreen(MainScreenDirections.actionMainScreenToSearchPage())
         }
 
         binding.seeAllLatest.setOnClickListener {
-            nextScreen(MainScreenDirections.actionMainScreenToSeeAllScreen(category))
+            findNavController().changeScreen(MainScreenDirections.actionMainScreenToSeeAllScreen(category))
         }
 
         binding.seeAllTrending.setOnClickListener {
-            nextScreen(MainScreenDirections.actionMainScreenToSeeAllScreen("top"))
+            findNavController().changeScreen(MainScreenDirections.actionMainScreenToSeeAllScreen("top"))
         }
 
         homeAdapter.onClickItem = {
-            nextScreen(
+            findNavController().changeScreen(
                 MainScreenDirections.actionMainScreenToDetailsScreen(
                     title = it.title.toString(),
                     publishedAt = it.publishedAt,
@@ -147,15 +142,5 @@ class HomePage : BaseFragment(R.layout.page_home) {
     private fun setShimmer() {
         binding.parent.visibility = View.VISIBLE
         binding.shimmer.visibility = View.GONE
-    }
-
-    private fun nextScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in)
-            .setExitAnim(R.anim.slide_out)
-            .setPopEnterAnim(R.anim.slide_in_reverse)
-            .setPopExitAnim(R.anim.slide_out_reverse)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
     }
 }

@@ -3,22 +3,18 @@ package uz.isystem.newsapplication.presentation.splash
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.data.cache.LocaleStorage
 import uz.isystem.newsapplication.presentation.base.BaseFragment
+import uz.isystem.newsapplication.presentation.extations.changeScreen
 import java.util.Locale
 
-@RequiresApi(Build.VERSION_CODES.N)
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : BaseFragment(R.layout.screen_splash) {
     private lateinit var cache: LocaleStorage
@@ -92,22 +88,11 @@ class SplashScreen : BaseFragment(R.layout.screen_splash) {
 
     private fun checkIsFirst() {
         if (cache.getIsFirst()) {
-            nextScreen(SplashScreenDirections.actionSplashScreenToOnBoardScreen())
+            findNavController().changeScreen(SplashScreenDirections.actionSplashScreenToOnBoardScreen())
         } else if (cache.getIsSigned()) {
-            nextScreen(SplashScreenDirections.actionSplashScreenToMainScreen())
+            findNavController().changeScreen(SplashScreenDirections.actionSplashScreenToMainScreen())
         } else {
-            nextScreen(SplashScreenDirections.actionSplashScreenToLoginScreen())
+            findNavController().changeScreen(SplashScreenDirections.actionSplashScreenToLoginScreen())
         }
     }
-
-    private fun nextScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in)
-            .setExitAnim(R.anim.slide_out)
-            .setPopEnterAnim(R.anim.slide_in_reverse)
-            .setPopExitAnim(R.anim.slide_out_reverse)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
-    }
-
 }

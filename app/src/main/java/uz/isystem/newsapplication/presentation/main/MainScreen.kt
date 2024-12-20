@@ -2,11 +2,10 @@ package uz.isystem.newsapplication.presentation.main
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.core.content.ContextCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.databinding.ScreenMainBinding
@@ -53,14 +52,9 @@ class MainScreen : BaseFragment(R.layout.screen_main) {
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     val currentItem = binding.viewPager.currentItem
-                    val navCurrentItem = binding.bottomNavigation.selectedItemId
                     if (currentItem > 0) {
-                        binding.viewPager.currentItem--
-                        if (navCurrentItem == R.id.profileID) {
-                            binding.bottomNavigation.selectedItemId = R.id.savedID
-                        } else if (navCurrentItem == R.id.savedID) {
-                            binding.bottomNavigation.selectedItemId = R.id.popularID
-                        }
+                        binding.viewPager.setCurrentItem(currentItem - 1, true)
+                        binding.bottomNavigation.menu.getItem(currentItem - 1).isChecked = true
                     } else {
                         if (doubleBackToExitPressedOnce) {
                             requireActivity().finish()
@@ -74,11 +68,18 @@ class MainScreen : BaseFragment(R.layout.screen_main) {
                             Toast.LENGTH_SHORT
                         ).show()
 
-                        Handler().postDelayed({
+                        Handler(Looper.getMainLooper()).postDelayed({
                             doubleBackToExitPressedOnce = false
                         }, 2000)
                     }
                 }
             })
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().window.navigationBarColor =
+            requireContext().getColor(R.color.background_color)
+    }
+
 }

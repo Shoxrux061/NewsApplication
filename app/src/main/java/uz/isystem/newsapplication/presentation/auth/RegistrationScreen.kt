@@ -5,8 +5,6 @@ import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -18,12 +16,13 @@ import uz.isystem.newsapplication.data.model.user.UserDetailsModel
 import uz.isystem.newsapplication.data.model.user.UserModel
 import uz.isystem.newsapplication.databinding.ScreenRegistrationBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
+import uz.isystem.newsapplication.presentation.extations.changeScreen
 
 class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
 
     private val binding by viewBinding(ScreenRegistrationBinding::bind)
-    private lateinit var auth: FirebaseAuth
-    private lateinit var dbr: DatabaseReference
+    private var auth: FirebaseAuth? = null
+    private var dbr: DatabaseReference? = null
     private var errorText: String? = null
     private var errorPassword: String? = null
     private var errorName: String? = null
@@ -48,7 +47,7 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
             createAcc(email = email, password = password, name = name)
         }
         binding.goToLogin.setOnClickListener {
-            nextScreen(RegistrationScreenDirections.actionRegistrationScreenToLoginScreen())
+            findNavController().changeScreen(RegistrationScreenDirections.actionRegistrationScreenToLoginScreen())
         }
     }
 
@@ -74,24 +73,24 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
         }
         isLoading = true
         setLoading()
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { result ->
+        auth?.createUserWithEmailAndPassword(email, password)?.addOnCompleteListener { result ->
             if (result.isSuccessful) {
                 isLoading = false
                 setLoading()
-                val uid = auth.uid.toString()
+                val uid = auth?.uid.toString()
                 val user = UserModel(
                     password = password,
                     email = email,
                     name = name
                 )
-                dbr.child(uid).child(getString(R.string.path_details)).setValue(user)
+                dbr?.child(uid)?.child(getString(R.string.path_details))?.setValue(user)
                 val userDetails = UserDetailsModel(
                     userName = name
                 )
-                dbr.child(uid).child(getString(R.string.path_details)).setValue(userDetails)
+                dbr?.child(uid)?.child(getString(R.string.path_details))?.setValue(userDetails)
                 LocaleStorage.getObject().setIsSigned(true)
                 LocaleStorage.getObject().setEmailNPassword(email, password)
-                nextScreen(RegistrationScreenDirections.actionRegistrationScreenToMainScreen())
+                findNavController().changeScreen(RegistrationScreenDirections.actionRegistrationScreenToMainScreen())
 
             } else {
                 isLoading = false
@@ -99,16 +98,6 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
                 Toast.makeText(context, "Canceled", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    private fun nextScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in)
-            .setExitAnim(R.anim.slide_out)
-            .setPopEnterAnim(R.anim.slide_in_reverse)
-            .setPopExitAnim(R.anim.slide_out_reverse)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
     }
 
     private fun setLoading() {

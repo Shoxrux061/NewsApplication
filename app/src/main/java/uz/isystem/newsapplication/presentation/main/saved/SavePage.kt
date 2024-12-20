@@ -20,8 +20,8 @@ import uz.isystem.newsapplication.data.room.RoomDataBase
 import uz.isystem.newsapplication.databinding.PageSaveBinding
 import uz.isystem.newsapplication.presentation.adapter.SavedAdapter
 import uz.isystem.newsapplication.presentation.base.BaseFragment
+import uz.isystem.newsapplication.presentation.extations.changeScreen
 import uz.isystem.newsapplication.presentation.main.MainScreenDirections
-import kotlin.math.log
 
 class SavePage : BaseFragment(R.layout.page_save) {
     private val binding by viewBinding(PageSaveBinding::bind)
@@ -29,6 +29,8 @@ class SavePage : BaseFragment(R.layout.page_save) {
     private lateinit var auth: FirebaseAuth
     private lateinit var dbr: DatabaseReference
     private lateinit var uid: String
+    private var vel: ValueEventListener? = null
+    private var isViewDestroyed = false
     private val room = RoomDataBase.getInstance()
 
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
@@ -65,7 +67,7 @@ class SavePage : BaseFragment(R.layout.page_save) {
 
         val articlesList = ArrayList<RoomArticles>()
 
-        dbr.addValueEventListener(object : ValueEventListener {
+        vel = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 for (articleSnapshot in snapshot.children) {
@@ -92,24 +94,29 @@ class SavePage : BaseFragment(R.layout.page_save) {
                 }
                 room!!.deleteAllNews()
                 room.addAllNews(articlesList)
+
                 if (articlesList.isEmpty()) {
+                    Log.d("TAGData", "firebase is empty: ${room.getAllSaved()}")
                     binding.empty.visibility = View.VISIBLE
                 }
                 binding.progressBar.visibility = View.GONE
-                binding.empty.visibility = View.GONE
                 adapter.setData(articlesList)
             }
 
             override fun onCancelled(error: DatabaseError) {
-
+                setRoomData()
             }
-        })
+        }
+
+        vel?.let {
+            dbr.addValueEventListener(it)
+        }
 
     }
 
     private fun setActions() {
         adapter.onClickItem = {
-            findNavController().navigate(
+            findNavController().changeScreen(
                 MainScreenDirections.actionMainScreenToDetailsScreen(
                     description = it.description.toString(),
                     title = it.title,
@@ -125,9 +132,21 @@ class SavePage : BaseFragment(R.layout.page_save) {
     private fun setRoomData() {
         if (room!!.getAllSaved().isEmpty()) {
             binding.empty.visibility = View.VISIBLE
+            Log.d("TAGData", "setRoomData is empty: ${room.getAllSaved()}")
+
         } else {
+            Log.d("TAGData", "setRoomData is not empty: ${room.getAllSaved()}")
             adapter.setData(room.getAllSaved())
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        isViewDestroyed = true
+        vel?.let {
+            dbr.removeEventListener(it)
+        }
+
     }
 
     private fun setAdapter() {

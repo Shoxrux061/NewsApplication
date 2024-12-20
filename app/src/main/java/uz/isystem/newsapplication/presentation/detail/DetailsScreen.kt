@@ -30,7 +30,8 @@ class DetailsScreen : BaseFragment(R.layout.screen_details) {
     private lateinit var dbr: DatabaseReference
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
 
-        requireActivity().window.navigationBarColor = requireContext().getColor(R.color.background_color)
+        requireActivity().window.navigationBarColor =
+            requireContext().getColor(R.color.background_color)
         setFirebase()
         setData()
         setActions()
@@ -48,15 +49,12 @@ class DetailsScreen : BaseFragment(R.layout.screen_details) {
             findNavController().popBackStack()
         }
         binding.saveBtn.setOnClickListener {
-
             savePost()
         }
         binding.shareBtn.setOnClickListener {
-
             showShareDialog()
         }
         binding.link.setOnClickListener {
-
             showLinkDialog()
         }
     }

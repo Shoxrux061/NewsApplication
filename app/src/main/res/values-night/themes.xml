@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.NewsApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="statusBarBackground">@color/background_color</item>
-        <item name="android:navigationBarColor">#2A2831</item>
+        <item name="android:navigationBarColor">@color/background_color</item>
         <item name="android:statusBarColor">@color/background_color</item>
 
     </style>

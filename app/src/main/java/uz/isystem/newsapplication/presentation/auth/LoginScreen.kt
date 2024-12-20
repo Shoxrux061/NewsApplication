@@ -6,8 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -15,11 +13,12 @@ import uz.isystem.newsapplication.R
 import uz.isystem.newsapplication.data.cache.LocaleStorage
 import uz.isystem.newsapplication.databinding.ScreenLoginBinding
 import uz.isystem.newsapplication.presentation.base.BaseFragment
+import uz.isystem.newsapplication.presentation.extations.changeScreen
 
 class LoginScreen : BaseFragment(R.layout.screen_login) {
 
     private val binding by viewBinding(ScreenLoginBinding::bind)
-    private lateinit var auth: FirebaseAuth
+    private var auth: FirebaseAuth? = null
     private var isLoading = false
     private var errorText: String? = null
     private var errorPassword: String? = null
@@ -44,19 +43,10 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
             login(email = email, password = password)
         }
         binding.goToReg.setOnClickListener {
-            nextScreen(LoginScreenDirections.actionLoginScreenToRegistrationScreen())
+            findNavController().changeScreen(LoginScreenDirections.actionLoginScreenToRegistrationScreen())
         }
     }
 
-    private fun nextScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in)
-            .setExitAnim(R.anim.slide_out)
-            .setPopEnterAnim(R.anim.slide_in_reverse)
-            .setPopExitAnim(R.anim.slide_out_reverse)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
-    }
 
     private fun login(email: String, password: String) {
 
@@ -72,14 +62,14 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
         isLoading = true
         setLoading()
 
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { result ->
+        auth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener { result ->
 
             if (result.isSuccessful) {
                 isLoading = false
                 setLoading()
                 LocaleStorage.getObject().setIsSigned(true)
                 LocaleStorage.getObject().setEmailNPassword(email, password)
-                nextScreen(LoginScreenDirections.actionLoginScreenToMainScreen())
+                findNavController().changeScreen(LoginScreenDirections.actionLoginScreenToMainScreen())
             } else {
                 isLoading = false
                 setLoading()

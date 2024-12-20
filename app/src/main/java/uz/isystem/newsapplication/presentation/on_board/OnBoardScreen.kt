@@ -3,8 +3,6 @@ package uz.isystem.newsapplication.presentation.on_board
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.newsapplication.R
@@ -13,6 +11,7 @@ import uz.isystem.newsapplication.data.model.ViewPagerModel
 import uz.isystem.newsapplication.databinding.ScreenOnBoardBinding
 import uz.isystem.newsapplication.presentation.adapter.ViewPagerAdapter
 import uz.isystem.newsapplication.presentation.base.BaseFragment
+import uz.isystem.newsapplication.presentation.extations.changeScreen
 
 class OnBoardScreen : BaseFragment(R.layout.screen_on_board) {
     private val binding by viewBinding(ScreenOnBoardBinding::bind)
@@ -34,7 +33,7 @@ class OnBoardScreen : BaseFragment(R.layout.screen_on_board) {
                 }
             }
         }
-        requireActivity().onBackPressedDispatcher.addCallback(this,callback)
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     private fun addPagerData() {
@@ -87,7 +86,7 @@ class OnBoardScreen : BaseFragment(R.layout.screen_on_board) {
 
         if (binding.viewPager.currentItem == 2 && binding.nextBtn.text == text) {
             LocaleStorage.getObject().setIsNotFirst()
-            nextScreen(OnBoardScreenDirections.actionOnBoardScreenToRegistrationScreen())
+            findNavController().changeScreen(OnBoardScreenDirections.actionOnBoardScreenToRegistrationScreen())
         }
 
         if (binding.viewPager.currentItem == 2) {
@@ -95,15 +94,5 @@ class OnBoardScreen : BaseFragment(R.layout.screen_on_board) {
         } else {
             binding.nextBtn.text = getString(R.string.next_btn)
         }
-    }
-
-    private fun nextScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in)
-            .setExitAnim(R.anim.slide_out)
-            .setPopEnterAnim(R.anim.slide_in_reverse)
-            .setPopExitAnim(R.anim.slide_out_reverse)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
     }
 }
